@@ -7,7 +7,7 @@
 <meta name="description" content="منيو مطبخ سوبر محشي للأكل البيتي — محاشي، لحوم وطيور، صواني فرن، وسمبوسك.">
 <title>مطبخ سوبر محشي | المنيو</title>
 
-<!-- إعدادات تطبيق الويب وتجربة ملء الشاشة -->
+<!-- إعدادات تطبيق الويب وتجربة ملء الشاشة بدون شريط المتصفح -->
 <link rel="manifest" href="manifest.json">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -39,4 +39,226 @@ h1 em{font-style:normal;color:#ffdc71}
 .hero-photo img{width:100%;height:100%;object-fit:cover}
 .quickbar{max-width:1120px;margin:-20px auto 28px;position:relative;z-index:3;padding:0 18px}
 .quickbar-inner{background:#fffdf5;border:1px solid var(--line);box-shadow:0 10px 30px #513d1b13;border-radius:18px;display:grid;grid-template-columns:repeat(3,1fr);overflow:hidden}
-.quick{padding:14px 18px;text-align:center;border-left:1px solid var(--
+.quick{padding:14px 18px;text-align:center;border-left:1px solid var(--line);font-size:.92rem;font-weight:700}
+.quick:last-child{border-left:0}.quick b{display:block;color:var(--green);font-size:1rem}.quick small{color:var(--muted)}
+main{max-width:1120px;margin:auto;padding:0 18px 36px}
+.section-heading{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:30px 0 16px}
+.section-heading h2{font-size:1.65rem;margin:0;color:var(--green);font-weight:900}
+.section-heading p{margin:3px 0 0;color:var(--muted);font-size:.9rem}
+.menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.menu-card{background:#fffdf6;border:1px solid var(--line);border-radius:23px;overflow:hidden;box-shadow:0 8px 25px #3d32160a}
+.card-photo{height:185px;position:relative;overflow:hidden;background:#e8dfc6}
+.card-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.menu-card:hover .card-photo img{transform:scale(1.04)}
+.photo-label{position:absolute;right:16px;bottom:14px;background:#153d1de8;color:#fff5d7;border:1px solid #f1ce69;border-radius:12px;padding:7px 13px;font-weight:900}
+.card-content{padding:18px}
+.card-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px;color:var(--green);font-size:1.28rem;font-weight:900}
+.pill{font-size:.73rem;color:#77520d;background:#fff0bd;border-radius:99px;padding:4px 9px;white-space:nowrap}
+.menu-list{list-style:none;padding:0;margin:0}
+.menu-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed #e6dcc4}
+.menu-item:last-child{border-bottom:0;padding-bottom:0}
+.item-info{min-width:0}.item-name{font-weight:700;line-height:1.55}.item-note{display:block;font-size:.78rem;color:var(--muted);font-weight:500;line-height:1.5}
+.price{flex-shrink:0;min-width:76px;text-align:center;background:#245c28;color:#fff;border-radius:9px;padding:4px 10px;font-weight:900;font-size:1rem;box-shadow:inset 0 -2px #00000012}
+.price.red{background:var(--red)}.price.gold{background:#a96c13}
+.price small{font-size:.68rem;font-weight:600}
+.full{grid-column:1/-1}
+.two-prices{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.two-prices .price{min-width:64px}
+.price-labels{display:flex;gap:6px;justify-content:flex-end;color:var(--muted);font-size:.68rem;margin:0 0 4px}
+.note-strip{margin:26px 0;background:#fff1cb;border:1px solid #e6c66c;border-radius:18px;padding:20px 22px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.note-icon{font-size:1.7rem}.note-strip h3{margin:0 0 6px;color:#7e281e}.note-strip p{margin:4px 0;font-size:.9rem;line-height:1.8}
+.contact{background:linear-gradient(120deg,#0e3218,#20572a);border-radius:25px;color:white;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.contact h2{margin:0 0 4px;font-size:1.6rem}.contact p{margin:0;color:#e6e8d2}
+.contact-link{background:#f4cc5e;color:#20321b;border-radius:14px;padding:12px 18px;font-weight:900;display:inline-flex;gap:8px;align-items:center}
+footer{text-align:center;padding:20px;color:#736d5d;font-size:.82rem}
+@media(max-width:760px){.hero-inner{grid-template-columns:1fr}.hero-photo{height:220px;grid-row:1}.hero{padding-top:22px}.hero-copy{text-align:center}.hero p{margin-inline:auto}.hero-actions{justify-content:center}.quickbar-inner{grid-template-columns:1fr}.quick{border-left:0;border-bottom:1px solid var(--line);padding:10px}.quick:last-child{border-bottom:0}.menu-grid{grid-template-columns:1fr}.full{grid-column:auto}.card-photo{height:200px}.section-heading{align-items:start;flex-direction:column}.contact{justify-content:center;text-align:center}.note-strip{padding:16px}}
+@media(max-width:420px){main{padding-inline:12px}.quickbar{padding-inline:12px}.card-content{padding:14px}.menu-item{gap:8px}.price{min-width:66px;padding:4px 7px}.item-name{font-size:.92rem}.hero-photo{height:190px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+ <div class="hero-inner">
+  <div class="hero-copy">
+   <div class="brand-mark"><span>🍲</span> أكل بيتي جاهز على التسوية</div>
+   <h1>مطبخ <em>سوبر محشي</em></h1>
+   <p>محاشينا مش زي أي محاشي… أصل إحنا سوبر محشي! اختار أكلك المفضل، وإحنا نجهزهولك بطعم البيت وبكل حب.</p>
+   <div class="hero-actions">
+     <a class="btn btn-primary" href="#menu">🍽️ شوف المنيو والأسعار</a>
+     <a class="btn btn-outline" href="https://wa.me/201097457350" target="_blank" rel="noopener">💬 اطلب على واتساب</a>
+     <!-- زر التثبيت -->
+     <button id="installAppBtn" class="btn btn-outline" style="display: none; cursor: pointer; font-family: inherit; background: transparent;">📱 تثبيت التطبيق</button>
+   </div>
+  </div>
+  <div class="hero-photo">
+    <img src="https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=600&q=80" alt="أكلات بيتية مشوية وشهية">
+  </div>
+ </div>
+</header>
+
+<div class="quickbar">
+ <div class="quickbar-inner">
+  <div class="quick"><b>🥬 محاشي بيتي</b><small>جاهزة على التسوية</small></div>
+  <div class="quick"><b>🍗 لحوم وطيور</b><small>تتبيلات وتجهيزات متنوعة</small></div>
+  <div class="quick"><b>🥘 صواني فرن</b><small>أحجام تناسب كل عزومة</small></div>
+ </div>
+</div>
+
+<main id="menu">
+ <div class="section-heading">
+  <div>
+   <h2>منيو سوبر محشي</h2>
+   <p>كل اللي بتحبه من أكل البيت في مكان واحد</p>
+  </div>
+ </div>
+
+ <div class="menu-grid">
+  <!-- ركن المحاشي -->
+  <section class="menu-card">
+   <div class="card-photo">
+    <img src="https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=600&q=80" alt="تشكيلة محاشي بيتية">
+    <span class="photo-label">ركن المحاشي</span>
+   </div>
+   <div class="card-content">
+    <h3 class="card-title">🥬 ركن المحاشي <span class="pill">سعر الكيلو</span></h3>
+    <ul class="menu-list">
+     <li class="menu-item"><span class="item-name">محشي كرنب</span><span class="price">140 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">محشي باذنجان</span><span class="price">140 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">محشي مشكل</span><span class="price">140 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">محشي كوسة</span><span class="price">150 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">محشي فلفل</span><span class="price">130 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">محشي ورق عنب</span><span class="price">180 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">ممبار بلدي محشي <span class="item-note">مسلوق</span></span><span class="price">280 ج.م</span></li>
+    </ul>
+   </div>
+  </section>
+
+  <!-- ركن اللحوم والطيور -->
+  <section class="menu-card">
+   <div class="card-photo">
+    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" alt="لحوم وطيور متبلة">
+    <span class="photo-label">ركن اللحوم والطيور</span>
+   </div>
+   <div class="card-content">
+    <h3 class="card-title">🍗 اللحوم والطيور <span class="pill">سعر الكيلو</span></h3>
+    <ul class="menu-list">
+     <li class="menu-item"><span class="item-name">بفتيك بلدي متبل<span class="item-note">جاهز للتحمير</span></span><span class="price red">650 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">جوز حمام محشي فريك<span class="item-note">مسلوق للتحمير</span></span><span class="price red">370 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">كفتة حاتي<span class="item-note">جاهزة للشوي</span></span><span class="price red">350 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">برجر<span class="item-note">جاهز للشوي</span></span><span class="price red">350 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">جوز حمام محشي أرز<span class="item-note">مسلوق للتحمير</span></span><span class="price red">350 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">ناجتس<span class="item-note">جاهز للتحمير</span></span><span class="price red">340 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">استربس<span class="item-note">نصف قلية</span></span><span class="price red">340 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">كفتة أرز<span class="item-note">جاهزة للتحمير</span></span><span class="price red">350 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">كبيبة شامي<span class="item-note">جاهزة للتحمير</span></span><span class="price red">350 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">صدور فراخ متبلة</span><span class="price red">320 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">شيش طاووق متبل<span class="item-note">جاهز للشوي</span></span><span class="price red">320 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">فرخة كاملة متبلة<span class="item-note">جاهزة للشوي</span></span><span class="price red">320 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">فرخة بلدي متبلة<span class="item-note">جاهزة للسلق</span></span><span class="price red">300 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">كيلو بانيه متبل<span class="item-note">جاهز للتحمير</span></span><span class="price red">320 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">حواوشي<span class="item-note">جاهز للحشو</span></span><span class="price red">300 ج.م</span></li>
+    </ul>
+   </div>
+  </section>
+
+  <!-- ركن الصواني -->
+  <section class="menu-card">
+   <div class="card-photo">
+    <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=600&q=80" alt="صواني فرن">
+    <span class="photo-label">ركن الصواني المميزة</span>
+   </div>
+   <div class="card-content">
+    <h3 class="card-title">🥘 الصواني المميزة <span class="pill">وسط وكبير</span></h3>
+    <div class="price-labels"><span>الوسط</span><span>الكبير</span></div>
+    <ul class="menu-list">
+     <li class="menu-item"><span class="item-name">مكرونة بشاميل</span><span class="two-prices"><span class="price gold">380</span><span class="price gold">450</span></span></li>
+     <li class="menu-item"><span class="item-name">نجرسكو</span><span class="two-prices"><span class="price gold">360</span><span class="price gold">450</span></span></li>
+     <li class="menu-item"><span class="item-name">كوسة بالبشاميل</span><span class="two-prices"><span class="price gold">380</span><span class="price gold">450</span></span></li>
+     <li class="menu-item"><span class="item-name">جلاش باللحمة المفرومة</span><span class="two-prices"><span class="price gold">300</span><span class="price gold">350</span></span></li>
+     <li class="menu-item"><span class="item-name">رقاق باللحمة المفرومة والقشطة والسمن البلدي</span><span class="two-prices"><span class="price gold">—</span><span class="price gold">400</span></span></li>
+    </ul>
+    <p class="item-note" style="margin-top:12px">الأسعار بالترتيب: الحجم الوسط ثم الحجم الكبير — بالجنيه المصري.</p>
+   </div>
+  </section>
+
+  <!-- ركن السمبوسك -->
+  <section class="menu-card">
+   <div class="card-photo">
+    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80" alt="سمبوسك مقرمش">
+    <span class="photo-label">ركن السمبوسك</span>
+   </div>
+   <div class="card-content">
+    <h3 class="card-title">🥟 ركن السمبوسك <span class="pill">سعر الكيلو</span></h3>
+    <ul class="menu-list">
+     <li class="menu-item"><span class="item-name">لحمة</span><span class="price">350 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">فراخ / ميكس جبن</span><span class="price">300 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">جبنة كيري بالبسطرمة</span><span class="price">280 ج.م</span></li>
+     <li class="menu-item"><span class="item-name">جبنة</span><span class="price">230 ج.م</span></li>
+    </ul>
+   </div>
+  </section>
+ </div>
+
+ <section class="note-strip">
+  <div class="note-icon">💡</div>
+  <div>
+   <h3>معلومات تهمك</h3>
+   <p>• أسعار الطيور واللحوم قابلة للتغيير حسب سعر اليوم.</p>
+   <p>• يُرجى طلب الأوردر قبلها بيوم، ويوم الجمعة إجازة المطبخ.</p>
+   <p>• أطباق الإطعام وتجهيز المناسبات والعزائم والأفراح بالحجز المسبق من 3 إلى 4 أيام.</p>
+   <p>• متاح التوصيل داخل المقطم وخارجها.</p>
+  </div>
+ </section>
+
+ <section class="contact">
+  <div>
+   <h2>خلي الطعم علينا والأكل عليك ❤️</h2>
+   <p>للطلب والاستفسار — مطبخ سوبر محشي للأكل البيتي</p>
+  </div>
+  <a class="contact-link" href="https://wa.me/201097457350" target="_blank" rel="noopener">☏ واتساب: 01097457350</a>
+ </section>
+
+ <p style="text-align:center;color:#6d6a5c;margin:18px 0 0">📍 المقطم · الهضبة الوسطى · الحي الثاني · عند مدرسة الواحة</p>
+</main>
+
+<footer>مطبخ سوبر محشي للأكل البيتي · جميع الأسعار بالجنيه المصري</footer>
+
+<script>
+  // 1. تسجيل الـ Service Worker للعمل كتطبيق
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('Service Worker Registered'))
+        .catch(err => console.error('Service Worker Error:', err));
+    });
+  }
+
+  // 2. التحكم في إظهار زر التثبيت
+  let deferredPrompt;
+  const installBtn = document.getElementById('installAppBtn');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = 'inline-flex';
+  });
+
+  installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        console.log('User installed the app');
+      }
+      deferredPrompt = null;
+      installBtn.style.display = 'none';
+    }
+  });
+
+  window.addEventListener('appinstalled', () => {
+    installBtn.style.display = 'none';
+  });
+</script>
+
+</body>
+</html>
