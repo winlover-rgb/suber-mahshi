@@ -1,341 +1,2044 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#12381a">
-<meta name="description" content="منيو مطبخ سوبر محشي للأكل البيتي — محاشي، لحوم، طيور، صواني فرن، وسمبوسك جاهز على التسوية.">
-<title>مطبخ سوبر محشي | أكل بيتي جاهز على التسوية</title>
+<title>سوبر محشي · زكي المساعد الذكي</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root {
-    --green-dark: #0f2d15;
-    --green-main: #184c24;
-    --green-light: #267036;
-    --gold: #f4ca55;
-    --gold-hover: #e5b839;
-    --bg-page: #fbf9f4;
-    --card-bg: #ffffff;
-    --text-main: #1c221b;
-    --text-muted: #5e665c;
-    --border-color: #e8e2d5;
+/* ============================================================
+   🎨 MODERN PALETTE
+   ============================================================ */
+:root{
+  --bg:#fdfcfa;
+  --bg-2:#faf7f2;
+  --surface:#ffffff;
+  --surface-2:#f7f4ef;
+  --surface-3:#f0ece5;
+  --text:#1c1917;
+  --muted:#78716c;
+  --muted-2:#a8a29e;
+  --primary:#f97316;
+  --primary-2:#ea580c;
+  --primary-grad:linear-gradient(135deg,#fb923c,#f97316 60%,#ea580c);
+  --accent:#7c3aed;
+  --accent-2:#a855f7;
+  --accent-grad:linear-gradient(135deg,#a855f7,#7c3aed);
+  --success:#10b981;
+  --danger:#ef4444;
+  --border:#e7e5e4;
+  --border-2:#d6d3d1;
+  --shadow-sm:0 2px 8px rgba(28,25,23,.05);
+  --shadow:0 4px 24px rgba(28,25,23,.08);
+  --shadow-lg:0 20px 50px rgba(28,25,23,.12);
+  --shadow-color:0 12px 32px rgba(249,115,22,.25);
+  --radius-sm:14px;
+  --radius:20px;
+  --radius-lg:28px;
+  --radius-full:999px;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-    background-color: var(--bg-page);
-    color: var(--text-main);
-    font-family: 'Cairo', sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
+[data-theme="dark"]{
+  --bg:#0c0a09;
+  --bg-2:#1c1917;
+  --surface:#1c1917;
+  --surface-2:#292524;
+  --surface-3:#333230;
+  --text:#f5f5f4;
+  --muted:#a8a29e;
+  --muted-2:#78716c;
+  --border:#292524;
+  --border-2:#3f3b38;
+  --shadow-sm:0 2px 8px rgba(0,0,0,.3);
+  --shadow:0 4px 24px rgba(0,0,0,.4);
+  --shadow-lg:0 20px 50px rgba(0,0,0,.5);
+  --shadow-color:0 12px 32px rgba(249,115,22,.35);
 }
-a { text-decoration: none; color: inherit; }
-.hero {
-    background: linear-gradient(135deg, #0a1f0f 0%, #164722 65%, #1e5a2b 100%);
-    color: white; padding: 40px 20px 75px; position: relative;
-    border-bottom: 4px solid var(--gold);
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Tajawal','Cairo',sans-serif;
+  color:var(--text);
+  line-height:1.7;
+  overflow-x:hidden;
+  background:var(--bg);
+  background-image:
+    radial-gradient(ellipse at 15% 0%,rgba(249,115,22,.06),transparent 50%),
+    radial-gradient(ellipse at 85% 10%,rgba(124,58,237,.05),transparent 50%);
+  background-attachment:fixed;
+  transition:background-color .3s,color .3s;
 }
-.hero-container {
-    max-width: 1160px; margin: 0 auto; display: grid;
-    grid-template-columns: 1.1fr 0.9fr; gap: 35px; align-items: center;
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-weight:inherit}
+input{font-family:inherit}
+::selection{background:var(--primary);color:#fff}
+
+/* ============================================================
+   NAV (modern glassmorphism)
+   ============================================================ */
+.nav{
+  position:sticky;top:0;z-index:900;
+  padding:14px 20px;
+  background:color-mix(in srgb,var(--bg) 80%,transparent);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
 }
-.hero-text { z-index: 2; }
-.badge-kitchen {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(244, 202, 85, 0.15); border: 1px solid var(--gold);
-    color: var(--gold); padding: 6px 16px; border-radius: 50px;
-    font-size: 0.95rem; font-weight: 800; margin-bottom: 15px;
+.brand{
+  display:flex;align-items:center;gap:11px;
+  font-weight:900;font-size:1.25rem;letter-spacing:-.02em;
 }
-.hero h1 { font-size: clamp(2.3rem, 5vw, 3.8rem); font-weight: 900; line-height: 1.2; margin-bottom: 12px; }
-.hero h1 span { color: var(--gold); text-shadow: 0 2px 10px rgba(244, 202, 85, 0.3); }
-.hero p { font-size: 1.15rem; color: #e5ede6; margin-bottom: 25px; max-width: 540px; }
-.hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
-.btn {
-    display: inline-flex; align-items: center; gap: 8px; padding: 12px 26px;
-    border-radius: 50px; font-weight: 800; font-size: 1rem;
-    transition: all 0.25s ease; cursor: pointer;
+.brand-logo{
+  width:44px;height:44px;border-radius:14px;
+  background:var(--primary-grad);
+  display:grid;place-items:center;
+  box-shadow:var(--shadow-color);
+  overflow:hidden;flex-shrink:0;position:relative;
 }
-.btn-primary { background: var(--gold); color: #12381a; box-shadow: 0 4px 15px rgba(244, 202, 85, 0.4); }
-.btn-primary:hover { background: var(--gold-hover); transform: translateY(-2px); }
-.btn-outline { background: rgba(255, 255, 255, 0.08); border: 2px solid rgba(255, 255, 255, 0.4); color: white; }
-.btn-outline:hover { background: rgba(255, 255, 255, 0.18); border-color: white; }
-.hero-img-box {
-    position: relative; border-radius: 28px; overflow: hidden;
-    box-shadow: 0 20px 45px rgba(0,0,0,0.45);
-    border: 5px solid rgba(255, 255, 255, 0.2); height: 400px;
+.brand-logo img{width:100%;height:100%;object-fit:cover;position:relative;z-index:2}
+.brand-logo::after{
+  content:'🍲';position:absolute;font-size:1.3rem;
+  z-index:1;
 }
-.hero-img-box img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 0.5s ease; }
-.hero-img-box:hover img { transform: scale(1.03); }
-.features-bar { max-width: 1060px; margin: -35px auto 40px; padding: 0 16px; position: relative; z-index: 3; }
-.features-inner {
-    background: #ffffff; border-radius: 20px; display: grid;
-    grid-template-columns: repeat(4, 1fr); box-shadow: 0 12px 30px rgba(18, 56, 26, 0.08);
-    border: 1px solid var(--border-color); overflow: hidden;
+.brand-logo img:not([src=""]) ~ .brand-logo::after,
+.brand-logo img[src]:not([src=""]) + .brand-logo::after{display:none}
+.brand-name{
+  background:linear-gradient(135deg,var(--text) 30%,var(--primary));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
-.feature-item { padding: 18px 15px; text-align: center; border-left: 1px solid var(--border-color); }
-.feature-item:last-child { border-left: none; }
-.feature-item h4 { color: var(--green-main); font-size: 1rem; font-weight: 800; }
-.feature-item p { color: var(--text-muted); font-size: 0.82rem; margin-top: 3px; }
-main { max-width: 1160px; margin: 0 auto; padding: 10px 16px 60px; }
-.menu-title-section { text-align: center; margin-bottom: 35px; }
-.menu-title-section h2 {
-    font-size: 2.2rem; color: var(--green-dark); font-weight: 900;
-    display: inline-block; position: relative;
+.nav-spacer{flex:1}
+.nav-btn{
+  width:44px;height:44px;border-radius:14px;
+  display:grid;place-items:center;font-size:1.2rem;
+  background:var(--surface);border:1px solid var(--border);
+  transition:.2s;color:var(--text);
 }
-.menu-title-section h2::after {
-    content: ''; display: block; width: 60px; height: 4px;
-    background: var(--gold); margin: 8px auto 0; border-radius: 2px;
+.nav-btn:hover{transform:translateY(-2px);border-color:var(--primary);color:var(--primary)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative;overflow:hidden;
+  padding:60px 20px 100px;
 }
-.menu-title-section p { color: var(--text-muted); font-size: 1.05rem; margin-top: 8px; }
-.cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
-.section-card {
-    background: var(--card-bg); border-radius: 24px; border: 1px solid var(--border-color);
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.04); overflow: hidden;
-    display: flex; flex-direction: column; transition: transform 0.25s ease, box-shadow 0.25s ease;
+.hero::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(circle at 20% 30%,rgba(251,146,60,.15),transparent 45%),
+    radial-gradient(circle at 80% 70%,rgba(168,85,247,.12),transparent 45%);
+  pointer-events:none;
 }
-.section-card:hover { transform: translateY(-5px); box-shadow: 0 16px 32px rgba(24, 76, 36, 0.1); }
-.card-header-image { height: 220px; position: relative; overflow: hidden; }
-.card-header-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-.section-card:hover .card-header-image img { transform: scale(1.04); }
-.card-header-image .header-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(15, 45, 21, 0.88) 0%, rgba(15, 45, 21, 0.15) 60%);
-    display: flex; align-items: flex-end; padding: 16px 20px;
+.hero-in{
+  position:relative;z-index:2;max-width:1180px;margin:0 auto;
+  display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;
 }
-.header-overlay h3 {
-    color: #ffffff; font-size: 1.45rem; font-weight: 900;
-    display: flex; align-items: center; gap: 8px; text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--surface);border:1.5px solid var(--border);
+  color:var(--primary);padding:8px 18px;border-radius:var(--radius-full);
+  font-weight:800;font-size:.88rem;margin-bottom:20px;
+  box-shadow:var(--shadow-sm);
 }
-.header-tag { margin-right: auto; background: var(--gold); color: #12381a; font-size: 0.8rem; font-weight: 800; padding: 4px 12px; border-radius: 30px; }
-.card-body { padding: 22px 20px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
-.food-item {
-    display: flex; justify-content: space-between; align-items: center;
-    background: #fdfbf7; border: 1px solid #f0e9dc; border-radius: 14px;
-    padding: 11px 15px; transition: all 0.2s ease;
+.hero-badge .dot{
+  width:8px;height:8px;border-radius:50%;background:var(--primary);
+  box-shadow:0 0 0 0 rgba(249,115,22,.6);
+  animation:dotPulse 2s infinite;
 }
-.food-item:hover { background: #f6efe2; border-color: #ded1be; transform: translateX(-3px); }
-.item-info { display: flex; flex-direction: column; }
-.item-title { font-weight: 800; font-size: 1.05rem; color: var(--text-main); }
-.item-desc { font-size: 0.82rem; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
-.item-price {
-    background: var(--green-main); color: white; font-weight: 900; font-size: 0.98rem;
-    padding: 6px 14px; border-radius: 10px; white-space: nowrap;
-    box-shadow: 0 3px 8px rgba(24, 76, 36, 0.2);
+@keyframes dotPulse{
+  70%{box-shadow:0 0 0 10px rgba(249,115,22,0)}
+  100%{box-shadow:0 0 0 0 rgba(249,115,22,0)}
 }
-.tray-prices { display: flex; gap: 6px; align-items: center; }
-.tray-price-pill {
-    background: #f2e7cd; color: #4b360b; border: 1px solid #dec38c;
-    border-radius: 8px; padding: 4px 8px; font-size: 0.88rem; font-weight: 800;
-    display: flex; flex-direction: column; align-items: center; min-width: 58px;
+.hero h1{
+  font-family:'Tajawal',sans-serif;
+  font-size:clamp(2.5rem,5.5vw,4.5rem);
+  font-weight:900;line-height:1.08;
+  letter-spacing:-.03em;margin-bottom:18px;
 }
-.tray-price-pill small { font-size: 0.68rem; color: #7a5c1f; font-weight: 700; }
-.notice-box {
-    margin-top: 45px; background: #ffffff; border-radius: 20px;
-    border-right: 6px solid var(--gold); border-top: 1px solid var(--border-color);
-    border-left: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
-    padding: 24px 28px; display: flex; gap: 18px; align-items: flex-start;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+.hero h1 .grad{
+  background:var(--primary-grad);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
-.notice-icon {
-    font-size: 2rem; background: #fff8e5; width: 52px; height: 52px;
-    border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+.hero h1 .grad-2{
+  background:var(--accent-grad);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
-.notice-content h4 { color: var(--green-dark); font-size: 1.25rem; font-weight: 900; margin-bottom: 8px; }
-.notice-content ul { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 16px; }
-.notice-content li {
-    font-size: 0.95rem; color: #444b42; font-weight: 600;
-    display: flex; align-items: center; gap: 6px;
+.hero p{
+  font-size:1.12rem;color:var(--muted);
+  max-width:520px;margin-bottom:28px;font-weight:500;
 }
-.notice-content li::before { content: "•"; color: var(--gold); font-size: 1.4rem; }
-.contact-banner {
-    margin-top: 35px; background: linear-gradient(135deg, #113819 0%, #1c572a 100%);
-    border-radius: 22px; color: white; padding: 30px; display: flex;
-    justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
-    box-shadow: 0 12px 28px rgba(18, 56, 26, 0.2);
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 30px;border-radius:var(--radius-full);
+  background:var(--primary-grad);color:#fff;
+  font-weight:800;font-size:1.02rem;
+  box-shadow:var(--shadow-color);
+  transition:.25s;white-space:nowrap;
 }
-.contact-info h3 { font-size: 1.7rem; font-weight: 900; margin-bottom: 4px; }
-.contact-info p { color: #d1dfd4; font-size: 1rem; }
-.contact-btn {
-    background: var(--gold); color: #0f2d15; padding: 14px 26px;
-    border-radius: 50px; font-weight: 900; font-size: 1.1rem;
-    display: inline-flex; align-items: center; gap: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.25); transition: transform 0.2s ease;
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(249,115,22,.4)}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 30px;border-radius:var(--radius-full);
+  background:var(--surface);border:1.5px solid var(--border);
+  font-weight:800;font-size:1.02rem;color:var(--text);
+  transition:.25s;white-space:nowrap;
 }
-.contact-btn:hover { transform: scale(1.04); }
-.address-tag { text-align: center; margin-top: 25px; color: var(--text-muted); font-weight: 700; font-size: 0.95rem; }
-footer { text-align: center; padding: 24px 16px; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border-color); margin-top: 35px; }
-.fab-whatsapp {
-    position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white;
-    width: 60px; height: 60px; border-radius: 50%; display: flex;
-    align-items: center; justify-content: center;
-    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45); z-index: 999; transition: transform 0.2s ease;
+.btn-secondary:hover{transform:translateY(-3px);border-color:var(--primary);color:var(--primary);box-shadow:var(--shadow)}
+
+/* Hero visual */
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+.hero-img{
+  position:relative;width:100%;max-width:440px;aspect-ratio:1/1;
+  border-radius:40px;overflow:hidden;
+  box-shadow:var(--shadow-lg);
+  border:6px solid var(--surface);
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  transform:rotate(-3deg);
+  transition:transform .4s;
 }
-.fab-whatsapp:hover { transform: scale(1.1); }
-@media (max-width: 860px) {
-    .hero-container { grid-template-columns: 1fr; text-align: center; }
-    .hero-text { order: 1; }
-    .hero-img-box { order: 2; height: 260px; }
-    .hero-buttons { justify-content: center; }
-    .cards-grid { grid-template-columns: 1fr; }
-    .features-inner { grid-template-columns: 1fr; }
-    .feature-item { border-left: none; border-bottom: 1px solid var(--border-color); }
-    .feature-item:last-child { border-bottom: none; }
-    .notice-content ul { grid-template-columns: 1fr; }
-    .contact-banner { text-align: center; justify-content: center; }
+.hero-img:hover{transform:rotate(0deg) scale(1.02)}
+.hero-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
+.img-fallback{
+  position:absolute;inset:0;z-index:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;text-align:center;padding:20px;color:#fff;
+}
+.img-fallback::before{content:'🍲';font-size:6rem;line-height:1;filter:drop-shadow(0 4px 20px rgba(0,0,0,.3))}
+.img-fallback-title{font-family:'Tajawal';font-size:1.9rem;font-weight:900}
+.img-fallback-sub{font-size:1rem;font-weight:700;opacity:.9}
+.hero-float{
+  position:absolute;background:var(--surface);
+  border-radius:18px;padding:12px 16px;
+  box-shadow:var(--shadow-lg);
+  border:1px solid var(--border);
+  font-weight:800;font-size:.85rem;
+  display:flex;align-items:center;gap:9px;
+  z-index:5;
+  animation:float 4s ease-in-out infinite;
+}
+.hero-float.a{bottom:12%;right:-4%}
+.hero-float.b{top:8%;left:-6%;animation-delay:1.5s}
+@keyframes float{50%{transform:translateY(-10px)}}
+
+/* ============================================================
+   FEATURES BAR
+   ============================================================ */
+.features{
+  max-width:1180px;margin:-56px auto 44px;padding:0 20px;
+  position:relative;z-index:5;
+}
+.features-in{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  display:grid;grid-template-columns:repeat(4,1fr);
+  overflow:hidden;
+  box-shadow:var(--shadow-lg);
+}
+.feature{
+  padding:24px 16px;text-align:center;
+  border-left:1px solid var(--border);
+  transition:.25s;
+}
+.feature:last-child{border-left:none}
+.feature:hover{background:var(--surface-2)}
+.feature-icon{font-size:1.6rem;display:block;margin-bottom:6px}
+.feature h4{font-family:'Tajawal';font-size:.98rem;font-weight:800;margin-bottom:2px}
+.feature p{color:var(--muted);font-size:.78rem;font-weight:500}
+
+/* ============================================================
+   MAIN
+   ============================================================ */
+main{max-width:1180px;margin:0 auto;padding:0 20px 80px}
+
+.section-head{text-align:center;margin-bottom:32px}
+.section-head h2{
+  font-family:'Tajawal';font-size:clamp(1.9rem,3.8vw,2.8rem);
+  font-weight:900;letter-spacing:-.02em;margin-bottom:8px;
+}
+.section-head h2 .grad{
+  background:var(--primary-grad);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.section-head p{color:var(--muted);font-size:1rem;font-weight:500}
+
+/* Toolbar */
+.toolbar{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:20px;margin-bottom:32px;
+  box-shadow:var(--shadow);
+}
+.search-box{position:relative;margin-bottom:16px}
+.search-box input{
+  width:100%;padding:16px 56px 16px 20px;
+  border-radius:var(--radius);border:1.5px solid var(--border);
+  background:var(--surface-2);
+  font-size:1rem;font-weight:600;color:var(--text);
+  outline:none;transition:.2s;
+}
+.search-box input::placeholder{color:var(--muted-2);font-weight:500}
+.search-box input:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 4px rgba(249,115,22,.1)}
+.search-box .icon{
+  position:absolute;right:20px;top:50%;transform:translateY(-50%);
+  font-size:1.1rem;color:var(--primary);opacity:.7;pointer-events:none;
+}
+
+.categories{display:flex;gap:9px;flex-wrap:wrap}
+.cat{
+  padding:10px 20px;border-radius:var(--radius-full);
+  background:var(--surface-2);border:1.5px solid transparent;
+  font-weight:800;font-size:.9rem;color:var(--muted);
+  transition:.22s;white-space:nowrap;
+  display:flex;align-items:center;gap:6px;
+}
+.cat:hover{color:var(--text);background:var(--surface-3)}
+.cat.on{
+  background:var(--primary-grad);color:#fff;
+  border-color:transparent;
+  box-shadow:var(--shadow-color);
+}
+
+/* ============================================================
+   MENU GRID
+   ============================================================ */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+  gap:20px;
+}
+.dish{
+  position:relative;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:22px 20px 18px;
+  display:flex;flex-direction:column;gap:14px;
+  box-shadow:var(--shadow-sm);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s,border-color .3s;
+  overflow:hidden;
+  animation:fadeUp .5s backwards;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}}
+.dish::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--primary-grad);
+  transform:scaleX(0);transform-origin:right;
+  transition:transform .35s;
+}
+.dish:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow-lg);
+  border-color:var(--primary);
+}
+.dish:hover::before{transform:scaleX(1)}
+.dish.hide{display:none}
+
+.dish-head{display:flex;gap:14px;align-items:flex-start}
+.dish-emoji{
+  width:58px;height:58px;flex-shrink:0;
+  border-radius:18px;
+  background:linear-gradient(135deg,rgba(249,115,22,.1),rgba(124,58,237,.1));
+  border:1.5px solid var(--border);
+  display:grid;place-items:center;
+  font-size:1.7rem;
+  transition:.3s;
+}
+.dish:hover .dish-emoji{transform:scale(1.05) rotate(-5deg)}
+.dish-info{flex:1;min-width:0}
+.dish-info h3{
+  font-family:'Tajawal';font-size:1.1rem;font-weight:800;
+  line-height:1.3;margin-bottom:3px;letter-spacing:-.01em;
+}
+.dish-info p{font-size:.82rem;color:var(--muted);font-weight:500;line-height:1.45}
+.dish-tag{
+  display:inline-block;margin-top:8px;
+  font-size:.7rem;font-weight:800;
+  color:var(--primary);background:rgba(249,115,22,.1);
+  padding:3px 10px;border-radius:var(--radius-full);
+}
+.dish-actions{display:flex;gap:8px;margin-top:auto}
+.price-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:11px 10px;border-radius:var(--radius);
+  background:var(--surface-2);
+  border:1.5px solid var(--border);
+  font-weight:800;font-size:.95rem;color:var(--text);
+  transition:.2s;position:relative;overflow:hidden;
+}
+.price-btn small{font-size:.7rem;font-weight:600;color:var(--muted);opacity:.9}
+.price-btn:hover{
+  background:var(--primary-grad);color:#fff;
+  border-color:transparent;
+  box-shadow:var(--shadow-color);
+  transform:translateY(-2px);
+}
+.price-btn:hover small{color:rgba(255,255,255,.85)}
+.price-btn:active{transform:scale(.97)}
+.price-btn.added{background:var(--success);color:#fff;border-color:transparent}
+
+/* ============================================================
+   FEAST BUILDER
+   ============================================================ */
+.feast{
+  margin-top:52px;position:relative;
+  padding:44px 32px;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  background:linear-gradient(135deg,#0c0a09 0%,#1c1917 40%,#292524 100%);
+  color:#fff;
+  box-shadow:0 30px 60px rgba(0,0,0,.3);
+}
+.feast::before{
+  content:'';position:absolute;inset:0;opacity:.4;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(249,115,22,.4),transparent 40%),
+    radial-gradient(circle at 80% 80%,rgba(124,58,237,.3),transparent 40%);
+  pointer-events:none;
+}
+.feast-head{position:relative;z-index:2;text-align:center;margin-bottom:30px}
+.feast-head h3{
+  font-family:'Tajawal';font-size:clamp(1.6rem,3.2vw,2.2rem);
+  font-weight:900;letter-spacing:-.02em;margin-bottom:6px;
+}
+.feast-head h3 .grad{
+  background:linear-gradient(135deg,#fb923c,#f472b6);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.feast-head p{color:#a8a29e;font-size:.96rem;font-weight:500}
+.feast-grid{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;
+}
+.f-control label{
+  display:flex;justify-content:space-between;align-items:center;
+  font-weight:800;font-size:.95rem;margin-bottom:12px;
+}
+.f-control label output{
+  background:var(--primary-grad);color:#fff;
+  padding:4px 14px;border-radius:var(--radius-full);
+  font-weight:900;font-size:.88rem;
+}
+input[type=range]{
+  -webkit-appearance:none;width:100%;height:8px;
+  border-radius:10px;outline:none;
+  background:rgba(255,255,255,.1);
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:24px;height:24px;border-radius:50%;
+  background:var(--primary-grad);
+  border:3px solid #fff;
+  box-shadow:0 4px 12px rgba(249,115,22,.5);
+  cursor:pointer;transition:.15s;
+}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
+input[type=range]::-moz-range-thumb{
+  width:22px;height:22px;border-radius:50%;
+  background:#f97316;border:3px solid #fff;cursor:pointer;
+}
+.feast-btn{
+  position:relative;z-index:2;display:block;margin:0 auto;
+  padding:16px 44px;border-radius:var(--radius-full);
+  background:var(--primary-grad);color:#fff;
+  font-weight:900;font-size:1.08rem;
+  box-shadow:0 8px 24px rgba(249,115,22,.5);
+  transition:.25s;
+}
+.feast-btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 14px 36px rgba(249,115,22,.6)}
+.feast-result{position:relative;z-index:2;margin-top:24px;display:none}
+.feast-result.show{display:block;animation:fadeUp .4s}
+.fr-list{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius);padding:20px;
+  backdrop-filter:blur(10px);
+}
+.fr-row{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:10px 0;border-bottom:1px dashed rgba(255,255,255,.1);
+  font-size:.94rem;
+}
+.fr-row:last-child{border-bottom:none}
+.fr-row b{font-weight:700}
+.fr-row .q{color:#fb923c;font-weight:800;font-size:.85rem}
+.fr-total{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-top:16px;padding-top:14px;
+  border-top:2px solid rgba(249,115,22,.5);
+  font-weight:900;font-size:1.15rem;
+}
+.fr-total b{color:#fb923c;font-size:1.6rem}
+.fr-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.fr-actions .btn-primary,.fr-actions .btn-secondary{flex:1;justify-content:center;min-width:150px}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact{
+  margin-top:44px;padding:40px 32px;
+  background:var(--primary-grad);
+  border-radius:var(--radius-lg);
+  color:#fff;position:relative;overflow:hidden;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:24px;
+  box-shadow:var(--shadow-color);
+}
+.contact::before{
+  content:'';position:absolute;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.15),transparent 70%);
+  bottom:-200px;left:-100px;pointer-events:none;
+}
+.contact h3{
+  font-family:'Tajawal';font-size:clamp(1.4rem,3vw,1.9rem);
+  font-weight:900;margin-bottom:6px;letter-spacing:-.02em;
+  position:relative;
+}
+.contact p{color:rgba(255,255,255,.9);font-size:.98rem;font-weight:500;position:relative}
+.contact-btn{
+  position:relative;
+  display:inline-flex;align-items:center;gap:10px;
+  background:#fff;color:var(--primary);
+  padding:16px 32px;border-radius:var(--radius-full);
+  font-weight:900;font-size:1.02rem;
+  box-shadow:0 8px 24px rgba(0,0,0,.2);
+  transition:.2s;white-space:nowrap;
+}
+.contact-btn:hover{transform:scale(1.05)}
+.address{
+  text-align:center;margin-top:28px;
+  color:var(--muted);font-weight:600;font-size:.92rem;
+}
+
+footer{
+  text-align:center;padding:32px 20px;
+  color:var(--muted);font-size:.88rem;font-weight:600;
+  border-top:1px solid var(--border);
+}
+footer .heart{color:var(--primary);font-size:1.1rem}
+
+/* ============================================================
+   FABs
+   ============================================================ */
+.fab{
+  position:fixed;
+  width:60px;height:60px;border-radius:50%;
+  display:grid;place-items:center;
+  z-index:1200;
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s;
+  color:#fff;cursor:pointer;
+}
+.fab:hover{transform:scale(1.1) translateY(-2px)}
+.fab-wa{
+  right:22px;bottom:22px;
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  box-shadow:0 10px 28px rgba(37,211,102,.45);
+}
+.fab-cart{
+  right:22px;bottom:96px;
+  background:var(--primary-grad);
+  box-shadow:var(--shadow-color);
+  opacity:0;pointer-events:none;transform:scale(.5);
+  transition:.3s cubic-bezier(.34,1.56,.64,1);
+}
+.fab-cart.on{opacity:1;pointer-events:auto;transform:scale(1)}
+.fab-cart .badge-n{
+  position:absolute;top:-4px;left:-4px;
+  background:var(--accent);color:#fff;
+  min-width:24px;height:24px;border-radius:50%;
+  font-size:.72rem;font-weight:900;
+  display:grid;place-items:center;
+  border:2px solid var(--bg);
+}
+.fab-ai{
+  left:22px;bottom:22px;
+  width:auto;padding:0 22px;
+  border-radius:var(--radius-full);height:58px;
+  background:var(--accent-grad);color:#fff;
+  font-weight:800;font-size:.96rem;
+  display:flex;align-items:center;gap:10px;
+  box-shadow:0 10px 28px rgba(124,58,237,.45);
+  position:relative;
+}
+.fab-ai::before{
+  content:'';position:absolute;inset:-4px;
+  border-radius:var(--radius-full);
+  border:2px solid rgba(168,85,247,.5);
+  animation:aiRing 2.4s ease-out infinite;
+}
+@keyframes aiRing{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.15);opacity:0}}
+
+/* ============================================================
+   CART DRAWER
+   ============================================================ */
+.overlay{
+  position:fixed;inset:0;
+  background:rgba(12,10,9,.5);
+  backdrop-filter:blur(6px);
+  z-index:1500;opacity:0;pointer-events:none;
+  transition:.3s;
+}
+.overlay.on{opacity:1;pointer-events:auto}
+.cart{
+  position:fixed;top:0;left:0;bottom:0;
+  width:min(440px,100%);
+  background:var(--bg);z-index:1600;
+  display:flex;flex-direction:column;
+  transform:translateX(-102%);
+  transition:transform .38s cubic-bezier(.22,1,.36,1);
+  box-shadow:20px 0 60px rgba(0,0,0,.3);
+  border-left:1px solid var(--border);
+}
+.cart.on{transform:translateX(0)}
+.cart-head{
+  padding:20px 24px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+  background:var(--surface);
+}
+.cart-head h3{
+  font-family:'Tajawal';font-size:1.2rem;font-weight:900;
+  flex:1;letter-spacing:-.01em;
+}
+.cart-body{
+  flex:1;overflow-y:auto;
+  padding:20px;display:flex;flex-direction:column;gap:12px;
+}
+.cart-empty{
+  text-align:center;color:var(--muted);
+  padding:60px 20px;font-weight:600;
+}
+.cart-empty .ce{font-size:3rem;display:block;margin-bottom:14px;opacity:.5}
+.citem{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px 16px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:var(--shadow-sm);
+}
+.citem-emoji{
+  width:44px;height:44px;border-radius:12px;
+  background:var(--surface-2);
+  display:grid;place-items:center;
+  font-size:1.35rem;flex-shrink:0;
+}
+.citem-info{flex:1;min-width:0}
+.citem-info h4{
+  font-family:'Tajawal';font-size:.95rem;font-weight:800;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  margin-bottom:2px;
+}
+.citem-info p{font-size:.78rem;color:var(--muted);font-weight:500}
+.citem-info p b{color:var(--primary);font-weight:900}
+.qty{
+  display:flex;align-items:center;gap:6px;
+  background:var(--surface-2);border-radius:10px;
+  padding:3px;
+}
+.qty button{
+  width:28px;height:28px;border-radius:8px;
+  background:var(--surface);font-weight:900;
+  font-size:1rem;display:grid;place-items:center;
+  transition:.15s;
+}
+.qty button:hover{background:var(--primary);color:#fff}
+.qty span{
+  min-width:28px;text-align:center;
+  font-weight:900;font-size:.88rem;
+}
+.cart-foot{
+  padding:20px 24px;
+  border-top:1px solid var(--border);
+  background:var(--surface);
+}
+.cart-total{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:16px;font-weight:900;font-size:1.05rem;
+}
+.cart-total b{font-size:1.6rem;color:var(--primary);font-weight:900}
+.cart-send{
+  width:100%;padding:16px;border-radius:var(--radius);
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  color:#fff;font-weight:900;font-size:1.02rem;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  box-shadow:0 8px 22px rgba(37,211,102,.35);
+  transition:.2s;
+}
+.cart-send:hover{transform:translateY(-2px)}
+.cart-send:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* ============================================================
+   🧠 AI CHAT — Modern Design with Voice
+   ============================================================ */
+.ai-panel{
+  position:fixed;left:20px;bottom:92px;
+  width:min(420px,calc(100vw - 40px));
+  height:min(660px,calc(100vh - 130px));
+  background:var(--surface);
+  border-radius:var(--radius-lg);
+  border:1px solid var(--border);
+  box-shadow:0 40px 100px rgba(0,0,0,.25);
+  z-index:1400;
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  transform:translateY(20px) scale(.94);
+  opacity:0;pointer-events:none;
+  transition:.32s cubic-bezier(.22,1,.36,1);
+}
+.ai-panel.on{transform:none;opacity:1;pointer-events:auto}
+
+.ai-head{
+  background:var(--accent-grad);
+  color:#fff;padding:16px 20px;
+  display:flex;align-items:center;gap:12px;
+  flex-shrink:0;position:relative;overflow:hidden;
+}
+.ai-head::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 90% 10%,rgba(255,255,255,.2),transparent 60%);
+  pointer-events:none;
+}
+.ai-avatar{
+  width:46px;height:46px;border-radius:16px;
+  background:rgba(255,255,255,.2);
+  border:1.5px solid rgba(255,255,255,.4);
+  display:grid;place-items:center;
+  font-size:1.4rem;
+  position:relative;flex-shrink:0;z-index:2;
+}
+.ai-avatar::after{
+  content:'';position:absolute;bottom:-2px;left:-2px;
+  width:14px;height:14px;border-radius:50%;
+  background:#10b981;border:2.5px solid var(--accent);
+}
+.ai-head-info{flex:1;min-width:0;position:relative;z-index:2}
+.ai-head-info h4{
+  font-family:'Tajawal';font-size:1.02rem;font-weight:800;
+  margin-bottom:2px;
+}
+.ai-head-info p{
+  font-size:.74rem;opacity:.9;font-weight:600;
+  display:flex;align-items:center;gap:6px;
+}
+.ai-head-info p .voice-indicator{
+  display:inline-flex;gap:2px;align-items:center;
+}
+.ai-head-info p .voice-indicator .bar{
+  width:2px;background:#fff;border-radius:2px;
+  animation:barDance 1s ease-in-out infinite;
+}
+.ai-head-info p .voice-indicator .bar:nth-child(1){height:6px;animation-delay:0s}
+.ai-head-info p .voice-indicator .bar:nth-child(2){height:10px;animation-delay:.15s}
+.ai-head-info p .voice-indicator .bar:nth-child(3){height:7px;animation-delay:.3s}
+.ai-head-info p .voice-indicator .bar:nth-child(4){height:10px;animation-delay:.45s}
+@keyframes barDance{50%{transform:scaleY(.4)}}
+
+.ai-head-actions{display:flex;gap:6px;z-index:2;position:relative}
+.ai-icon-btn{
+  width:36px;height:36px;border-radius:12px;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.2);
+  color:#fff;font-size:1.05rem;
+  transition:.2s;
+}
+.ai-icon-btn:hover{background:rgba(255,255,255,.3);transform:scale(1.05)}
+.ai-icon-btn.muted{background:rgba(239,68,68,.5);border-color:rgba(239,68,68,.7)}
+.ai-icon-btn.speaking-active{background:#10b981;border-color:#10b981;animation:greenPulse 1.2s infinite}
+@keyframes greenPulse{50%{box-shadow:0 0 0 6px rgba(16,185,129,.2)}}
+
+/* Speaking banner */
+.ai-speaking-banner{
+  background:linear-gradient(135deg,#10b981,#059669);
+  color:#fff;padding:10px 20px;
+  display:none;align-items:center;gap:10px;
+  font-size:.85rem;font-weight:700;
+  border-bottom:1px solid var(--border);
+}
+.ai-speaking-banner.on{display:flex}
+.ai-speaking-banner .wave{
+  display:flex;gap:3px;align-items:center;
+}
+.ai-speaking-banner .wave .w-bar{
+  width:3px;background:#fff;border-radius:2px;
+  animation:waveDance 1s ease-in-out infinite;
+}
+.ai-speaking-banner .wave .w-bar:nth-child(1){height:10px;animation-delay:0s}
+.ai-speaking-banner .wave .w-bar:nth-child(2){height:16px;animation-delay:.1s}
+.ai-speaking-banner .wave .w-bar:nth-child(3){height:20px;animation-delay:.2s}
+.ai-speaking-banner .wave .w-bar:nth-child(4){height:16px;animation-delay:.3s}
+.ai-speaking-banner .wave .w-bar:nth-child(5){height:10px;animation-delay:.4s}
+@keyframes waveDance{50%{transform:scaleY(.3)}}
+.ai-speaking-banner .stop-btn{
+  margin-right:auto;
+  background:rgba(255,255,255,.2);
+  border:1px solid rgba(255,255,255,.3);
+  padding:5px 12px;border-radius:12px;
+  color:#fff;font-weight:800;font-size:.78rem;
+  transition:.2s;
+}
+.ai-speaking-banner .stop-btn:hover{background:rgba(255,255,255,.3)}
+
+/* Voice info tooltip */
+.voice-info{
+  background:var(--surface-2);
+  padding:10px 20px;
+  font-size:.78rem;color:var(--muted);
+  border-bottom:1px solid var(--border);
+  display:none;align-items:center;gap:8px;
+  font-weight:600;
+}
+.voice-info.on{display:flex}
+.voice-info.warning{background:rgba(251,191,36,.15);color:#92400e}
+[data-theme="dark"] .voice-info.warning{background:rgba(251,191,36,.2);color:#fbbf24}
+.voice-info .vi-icon{font-size:1rem}
+
+/* Body */
+.ai-body{
+  flex:1;overflow-y:auto;
+  padding:18px;
+  display:flex;flex-direction:column;gap:12px;
+  scroll-behavior:smooth;
+}
+.ai-body::-webkit-scrollbar{width:6px}
+.ai-body::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:10px}
+
+.msg{display:flex;gap:9px;max-width:92%;animation:fadeUp .3s}
+.msg.bot{align-self:flex-start}
+.msg.user{align-self:flex-end;flex-direction:row-reverse}
+.msg .mini-av{
+  width:32px;height:32px;border-radius:11px;
+  display:grid;place-items:center;font-size:1rem;
+  flex-shrink:0;align-self:flex-end;
+  background:var(--accent-grad);color:#fff;
+  font-weight:800;
+}
+.msg.user .mini-av{
+  background:var(--primary-grad);
+}
+.bubble{
+  padding:12px 16px;border-radius:18px;
+  font-size:.9rem;font-weight:600;line-height:1.7;
+  word-break:break-word;
+}
+.msg.bot .bubble{
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  border-bottom-right-radius:6px;
+  color:var(--text);
+}
+.msg.user .bubble{
+  background:var(--primary-grad);
+  color:#fff;
+  border-bottom-left-radius:6px;
+  box-shadow:0 4px 12px rgba(249,115,22,.25);
+}
+.msg.bot.speaking .bubble{
+  border-color:var(--success);
+  box-shadow:0 0 0 2px rgba(16,185,129,.2);
+}
+
+/* Product list in chat */
+.chat-prods{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.chat-prod{
+  display:flex;align-items:center;gap:10px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;padding:10px 12px;
+  font-size:.84rem;font-weight:700;
+}
+.chat-prod .cp-emoji{font-size:1.15rem}
+.chat-prod .cp-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chat-prod .cp-price{color:var(--primary);font-weight:900;font-size:.82rem;white-space:nowrap}
+.chat-prod button{
+  width:30px;height:30px;border-radius:9px;
+  background:var(--primary-grad);color:#fff;
+  font-weight:900;display:grid;place-items:center;
+  font-size:1rem;flex-shrink:0;transition:.15s;
+}
+.chat-prod button:hover{transform:scale(1.1)}
+
+/* Chips */
+.ai-chips{
+  display:flex;gap:8px;flex-wrap:wrap;
+  padding:0 18px 12px;flex-shrink:0;
+}
+.ai-chips:empty{display:none}
+.ai-chip{
+  padding:8px 16px;border-radius:var(--radius-full);
+  background:var(--surface-2);
+  border:1.5px solid var(--border);
+  font-weight:800;font-size:.8rem;color:var(--muted);
+  transition:.2s;white-space:nowrap;
+}
+.ai-chip:hover{
+  border-color:var(--primary);color:var(--primary);
+  background:var(--surface);transform:translateY(-1px);
+}
+
+/* Form */
+.ai-form{
+  display:flex;gap:8px;padding:14px;
+  border-top:1px solid var(--border);
+  background:var(--surface);flex-shrink:0;
+  align-items:center;
+}
+.ai-form input{
+  flex:1;padding:13px 18px;
+  border-radius:var(--radius);
+  border:1.5px solid var(--border);
+  background:var(--surface-2);
+  font-size:.9rem;font-weight:600;color:var(--text);
+  outline:none;transition:.2s;min-width:0;
+}
+.ai-form input::placeholder{color:var(--muted-2)}
+.ai-form input:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px rgba(249,115,22,.1)}
+.ai-form input.recording{
+  border-color:var(--danger);
+  background:rgba(239,68,68,.05);
+  animation:inputPulse 1.4s infinite;
+}
+@keyframes inputPulse{50%{box-shadow:0 0 0 3px rgba(239,68,68,.2)}}
+
+.ai-form .send{
+  width:46px;height:46px;border-radius:15px;
+  background:var(--primary-grad);color:#fff;
+  display:grid;place-items:center;font-size:1.1rem;
+  flex-shrink:0;transition:.2s;
+  box-shadow:0 4px 12px rgba(249,115,22,.3);
+}
+.ai-form .send:hover{transform:scale(1.06)}
+.ai-form .send:active{transform:scale(.95)}
+
+.ai-form .mic{
+  background:var(--surface-2);color:var(--muted);
+  border:1.5px solid var(--border);
+  box-shadow:none;position:relative;
+}
+.ai-form .mic:hover{background:var(--surface);border-color:var(--primary);color:var(--primary)}
+.ai-form .mic.rec{
+  background:var(--danger);color:#fff;border-color:var(--danger);
+  animation:micPulse 1s infinite;
+}
+.ai-form .mic.rec::after{
+  content:'';position:absolute;inset:-4px;
+  border-radius:17px;border:2px solid var(--danger);
+  animation:micRing 1s infinite;
+}
+@keyframes micPulse{50%{box-shadow:0 0 0 8px rgba(239,68,68,.2)}}
+@keyframes micRing{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.3);opacity:0}}
+.ai-form .mic:disabled{opacity:.35;cursor:not-allowed}
+
+/* Typing indicator */
+.typing{
+  display:flex;gap:5px;padding:14px 18px;
+  align-items:center;flex-wrap:wrap;
+}
+.typing .label{
+  font-size:.78rem;color:var(--muted);
+  font-weight:600;margin-left:6px;
+}
+.typing i{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--primary);
+  animation:typingBounce 1.3s infinite;
+}
+.typing i:nth-child(2){animation-delay:.18s}
+.typing i:nth-child(3){animation-delay:.36s}
+@keyframes typingBounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-6px);opacity:1}}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast{
+  position:fixed;bottom:180px;left:50%;
+  transform:translate(-50%,20px);
+  z-index:3000;
+  background:var(--text);color:#fff;
+  padding:13px 26px;border-radius:var(--radius-full);
+  font-weight:800;font-size:.9rem;
+  box-shadow:0 14px 40px rgba(0,0,0,.3);
+  opacity:0;pointer-events:none;transition:.3s;
+  white-space:nowrap;max-width:90vw;
+  overflow:hidden;text-overflow:ellipsis;
+}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+.mic-warning{
+  position:absolute;top:calc(100% + 8px);left:50%;
+  transform:translateX(-50%);
+  background:var(--text);color:#fff;
+  padding:12px 18px;border-radius:14px;
+  font-size:.8rem;font-weight:600;
+  text-align:center;max-width:290px;z-index:2000;
+  box-shadow:0 8px 24px rgba(0,0,0,.4);
+  line-height:1.6;
+}
+.mic-warning::before{
+  content:'';position:absolute;top:-6px;left:50%;
+  transform:translateX(-50%) rotate(45deg);
+  width:12px;height:12px;background:var(--text);
+}
+.mic-warning button{
+  background:rgba(255,255,255,.2);color:#fff;
+  padding:6px 14px;border-radius:10px;
+  font-weight:800;font-size:.78rem;
+  margin-top:8px;margin-inline:auto;display:block;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:900px){
+  .hero-in{grid-template-columns:1fr;text-align:center;gap:36px}
+  .hero p{margin-inline:auto}
+  .hero-actions{justify-content:center}
+  .hero-img{max-width:340px}
+  .hero-float.a{right:2%}
+  .hero-float.b{left:2%}
+  .features-in{grid-template-columns:repeat(2,1fr)}
+  .feature:nth-child(2){border-left:none}
+  .feature:nth-child(1),.feature:nth-child(2){border-bottom:1px solid var(--border)}
+  .feast-grid{grid-template-columns:1fr}
+  .contact{text-align:center;justify-content:center}
+}
+@media(max-width:560px){
+  .features-in{grid-template-columns:1fr}
+  .feature{border-left:none;border-bottom:1px solid var(--border)}
+  .feature:last-child{border-bottom:none}
+  .menu-grid{grid-template-columns:1fr}
+  .ai-panel{
+    left:0;right:0;bottom:0;
+    width:100%;height:88vh;
+    border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+    transform:translateY(100%);
+  }
+  .ai-panel.on{transform:none}
+  .fab-ai{font-size:.88rem;padding:0 18px;height:52px}
+  .toast{bottom:160px;font-size:.82rem;padding:11px 18px}
+  .categories{overflow-x:auto;flex-wrap:nowrap;padding-bottom:6px;justify-content:flex-start}
+  .cat{flex-shrink:0}
 }
 </style>
 </head>
 <body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="brand">
+    <span class="brand-logo">
+      <img src="logo.png" alt="سوبر محشي" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='logo.jpg'}else{this.style.display='none'}">
+    </span>
+    <span class="brand-name">سوبر محشي</span>
+  </a>
+  <div class="nav-spacer"></div>
+  <button class="nav-btn" id="themeBtn" title="تبديل الوضع">🌙</button>
+</nav>
+
+<!-- HERO -->
 <header class="hero">
-    <div class="hero-container">
-        <div class="hero-text">
-            <div class="badge-kitchen">🍲 طعم البيت المصري الأصيل</div>
-            <h1>مطبخ <span>سوبر محشي</span></h1>
-            <p>محاشينا مش زي أي محاشي… أصل إحنا سوبر محشي! جهزنا لك أحلى الوصفات البيتي الطازجة بتتبيلات مميزة وجاهزة على التسوية فوراً.</p>
-            <div class="hero-buttons">
-                <a href="#menu-content" class="btn btn-primary">🍽️ استعراض المنيو والأسعار</a>
-                <a href="https://wa.me/201097457350" target="_blank" rel="noopener" class="btn btn-outline">💬 اطلب واتساب مباشرة</a>
-            </div>
-        </div>
-        <div class="hero-img-box">
-            <img src="Gemini_Generated_Image_gsagqegsagqegsag.jpg" alt="وليمة وسفرة مطبخ سوبر محشي">
-        </div>
+  <div class="hero-in">
+    <div class="hero-text">
+      <div class="hero-badge"><span class="dot"></span> مدعوم بمساعد ذكي اسمه زكي</div>
+      <h1>أكل البيت <span class="grad">اللي بيفكر</span> <br><span class="grad-2">ويتكلم</span> معاك</h1>
+      <p>محاشي، لحوم، طيور، صواني، وسمبوسك — جاهزين على التسوية. وزكي المساعد الذكي بيسمعك، بيرد عليك، وبينطق بصوت مصري حقيقي.</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn-primary">🍽️ شوف المنيو</a>
+        <button class="btn-secondary" id="heroAiBtn">🎙️ كلّم زكي</button>
+      </div>
     </div>
+    <div class="hero-visual">
+      <div class="hero-img">
+        <div class="img-fallback">
+          <div class="img-fallback-title">سوبر محشي</div>
+          <div class="img-fallback-sub">الأكل اللي بيتكلم</div>
+        </div>
+        <img src="Gemini_Generated_Image_gsagqegsagqegsag.jpg" alt="سوبر محشي" onerror="this.style.display='none'">
+      </div>
+      <div class="hero-float a">🔊 زكي بيتكلم مصري</div>
+      <div class="hero-float b">🎙️ بيسمعك</div>
+    </div>
+  </div>
 </header>
 
-<div class="features-bar">
-    <div class="features-inner">
-        <div class="feature-item"><h4>🥬 محاشي بلدي طازة</h4><p>خلطة بيتي وسمن بلدي جاهزة للتسوية</p></div>
-        <div class="feature-item"><h4>🥩 لحوم متبلة</h4><p>لحم بقري صافي متبل للشوي والتحمير</p></div>
-        <div class="feature-item"><h4>🍗 طيور وحمام محشي</h4><p>تنظيف بعناية وتتبيل جاهز فوراً</p></div>
-        <div class="feature-item"><h4>🥘 صواني وطواجن فرن</h4><p>أحجام تكفي العزومات واللمات</p></div>
-    </div>
+<!-- FEATURES -->
+<div class="features">
+  <div class="features-in">
+    <div class="feature"><span class="feature-icon">🥬</span><h4>محاشي بلدي</h4><p>خلطة بيتي وسمن بلدي</p></div>
+    <div class="feature"><span class="feature-icon">🥩</span><h4>لحوم متبلة</h4><p>جاهزة للشوي والتحمير</p></div>
+    <div class="feature"><span class="feature-icon">🍗</span><h4>طيور وحمام</h4><p>تنظيف وتتبيل كامل</p></div>
+    <div class="feature"><span class="feature-icon">🥘</span><h4>صواني فرن</h4><p>تكفي العزومات الكبيرة</p></div>
+  </div>
 </div>
 
-<main id="menu-content">
-    <div class="menu-title-section">
-        <h2>قائمة طعام سوبر محشي</h2>
-        <p>جميع الأصناف تُعد طازجة عند الطلب بكل حب ونظافة</p>
+<main>
+  <!-- Section head -->
+  <div class="section-head" id="menu">
+    <h2>المنيو <span class="grad">النهاردة</span></h2>
+    <p>اختار من أصنافنا — كل حاجة طازة وجاهزة على التسوية</p>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="search-box">
+      <input type="search" id="searchInput" placeholder="دوّر على طبق… (ورق عنب، بشاميل، شيش…)" autocomplete="off">
+      <span class="icon">🔍</span>
     </div>
-
-    <div class="cards-grid">
-        <!-- 1. ركن المحاشي -->
-        <div class="section-card">
-            <div class="card-header-image">
-                <img src="https://images.unsplash.com/photo-1541518763669-27fef04b14ea?q=80&w=900&auto=format&fit=crop" alt="محاشي مشكلة وورق عنب">
-                <div class="header-overlay"><h3>🥬 ركن المحاشي</h3><span class="header-tag">سعر الكيلو</span></div>
-            </div>
-            <div class="card-body">
-                <div class="food-item"><div class="item-info"><span class="item-title">محشي كرنب</span><span class="item-desc">ملفوف بعناية بخلطة المطبخ الخاصة</span></div><span class="item-price">140 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">محشي ورق عنب</span><span class="item-desc">طازج وناعم بخلطة مميزة بالليمون</span></div><span class="item-price">180 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">محشي باذنجان</span><span class="item-desc">أبيض وأسود مقور طازج</span></div><span class="item-price">140 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">محشي كوسة</span><span class="item-desc">كوسة بلدي طازجة بالنعناع والخلطة</span></div><span class="item-price">150 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">محشي فلفل</span><span class="item-desc">فلفل رومي بلدي مقور وجاهز</span></div><span class="item-price">130 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">محشي مشكل</span><span class="item-desc">تشكيلة من أفضل أنواع المحاشي</span></div><span class="item-price">140 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">ممبار بلدي محشي</span><span class="item-desc">مسلوق وجاهز للتحمير</span></div><span class="item-price">280 ج.م</span></div>
-            </div>
-        </div>
-
-        <!-- 2. ركن اللحوم المستقل -->
-        <div class="section-card">
-            <div class="card-header-image">
-                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=900&auto=format&fit=crop" alt="أطباق لحوم بلدي وكفتة">
-                <div class="header-overlay"><h3>🥩 ركن اللحوم </h3><span class="header-tag">سعر الكيلو</span></div>
-            </div>
-            <div class="card-body">
-                <div class="food-item"><div class="item-info"><span class="item-title">بفتيك بلدي متبل</span><span class="item-desc">جاهز للتحمير</span></div><span class="item-price">650 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">كفتة حاتي</span><span class="item-desc">جاهزة للشوي</span></div><span class="item-price">360 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">برجر لحم</span><span class="item-desc">جاهز للشوي</span></div><span class="item-price">360 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">كفتة أرز</span><span class="item-desc">جاهزة للتحمير</span></div><span class="item-price">350 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">كبيبة شامي</span><span class="item-desc">جاهزة للتحمير</span></div><span class="item-price">350 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">حواوشي</span><span class="item-desc">جاهز للحشو والتسوية</span></div><span class="item-price">300 ج.م</span></div>
-            </div>
-        </div>
-
-        <!-- 3. ركن الطيور والدواجن المستقل -->
-        <div class="section-card">
-            <div class="card-header-image">
-                <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?q=80&w=900&auto=format&fit=crop" alt="دواجن وحمام محشي">
-                <div class="header-overlay"><h3>🍗 ركن الطيور والدواجن</h3><span class="header-tag">سعر الكيلو / الجوز</span></div>
-            </div>
-            <div class="card-body">
-                <div class="food-item"><div class="item-info"><span class="item-title">جوز حمام محشي فريك</span><span class="item-desc">مسلوق للتحمير</span></div><span class="item-price">370 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">جوز حمام محشي أرز</span><span class="item-desc">مسلوق للتحمير</span></div><span class="item-price">350 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">ناجتس دجاج</span><span class="item-desc">جاهز للتحمير</span></div><span class="item-price">350 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">استربس دجاج</span><span class="item-desc">نصف قلية</span></div><span class="item-price">360 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">كيلو بانيه متبل</span><span class="item-desc">جاهز للتحمير</span></div><span class="item-price">320 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">شيش طاووق متبل</span><span class="item-desc">جاهز للشوي</span></div><span class="item-price">320 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">صدور فراخ متبلة</span><span class="item-desc">متبلة وجاهزة للطهي</span></div><span class="item-price">320 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">صدر دجاج مدخن شرائح  نصف كيلو</span><span class="item-desc">شرائح دجاج مدخن جاهزة للتقديم</span></div><span class="item-price">350 ج.م</span></div>
-<div class="food-item"><div class="item-info"><span class="item-title">فرخة محشية</span><span class="item-desc">جاهزة على التسوية</span></div><span class="item-price">350 ج.م</span></div>
-                                <div class="food-item"><div class="item-info"><span class="item-title">فرخة كاملة متبلة</span><span class="item-desc">جاهزة للشوي</span></div><span class="item-price">320 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">فرخة بلدي متبلة</span><span class="item-desc">جاهزة للسلق</span></div><span class="item-price">300 ج.م</span></div>
-            </div>
-        </div>
-
-        <!-- 4. ركن صواني الفرن -->
-        <div class="section-card">
-            <div class="card-header-image">
-                <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=900&auto=format&fit=crop" alt="صواني مكرونة بالبشاميل">
-                <div class="header-overlay"><h3>🥘 صواني وطواجن الفرن</h3><span class="header-tag">حجم وسط | كبير</span></div>
-            </div>
-            <div class="card-body">
-                <div class="food-item"><div class="item-info"><span class="item-title">مكرونة بشاميل</span><span class="item-desc">بشاميل كريمي غني ولحم مفروم</span></div><div class="tray-prices"><div class="tray-price-pill"><small>وسط</small>380 ج</div><div class="tray-price-pill"><small>كبير</small>480 ج</div></div></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">نجرسكو</span><span class="item-desc">قطع صدور دجاج مع الصوص الأبيض</span></div><div class="tray-prices"><div class="tray-price-pill"><small>وسط</small>380 ج</div><div class="tray-price-pill"><small>كبير</small>480 ج</div></div></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">كوسة بالبشاميل</span><span class="item-desc">كوسة باللحمة المفرومة والبشاميل</span></div><div class="tray-prices"><div class="tray-price-pill"><small>وسط</small>380 ج</div><div class="tray-price-pill"><small>كبير</small>480 ج</div></div></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">جلاش باللحمة المفرومة</span><span class="item-desc">مورق ومقرمش بالسمن البلدي</span></div><div class="tray-prices"><div class="tray-price-pill"><small>وسط</small>300 ج</div><div class="tray-price-pill"><small>كبير</small>350 ج</div></div></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">رقاق باللحمة المفرومة</span><span class="item-desc">بالقشطة والسمن البلدي</span></div><div class="tray-prices"><div class="tray-price-pill"><small>كبير فقط</small>400 ج</div></div></div>
-            </div>
-        </div>
-
-        <!-- 5. ركن السمبوسك والمقبلات -->
-        <div class="section-card">
-            <div class="card-header-image">
-                <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=900&auto=format&fit=crop" alt="سمبوسك مقرمش محشو">
-                <div class="header-overlay"><h3>🥟 ركن السمبوسك المقرمش</h3><span class="header-tag">سعر الكيلو</span></div>
-            </div>
-            <div class="card-body">
-                <div class="food-item"><div class="item-info"><span class="item-title">سمبوسك لحمة</span><span class="item-desc">لحم مفروم معصج بالبهارات الخاصة</span></div><span class="item-price">350 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">سمبوسك فراخ / ميكس جبن</span><span class="item-desc">حشوة دجاج أو تشكيلة أجبان غنية</span></div><span class="item-price">350 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">سمبوسك جبنة كيري بالبسطرمة</span><span class="item-desc">مزيج كريمي بنكهة البسطرمة البلدي</span></div><span class="item-price">280 ج.م</span></div>
-                <div class="food-item"><div class="item-info"><span class="item-title">سمبوسك جبنة</span><span class="item-desc">حشوة جبنة بيضاء خفيفة ولذيذة</span></div><span class="item-price">250 ج.م</span></div>
-            </div>
-        </div>
+    <div class="categories" id="categories">
+      <button class="cat on" data-cat="all">🍽️ كل الأصناف</button>
+      <button class="cat" data-cat="mahshi">🥬 محاشي</button>
+      <button class="cat" data-cat="meat">🥩 لحوم</button>
+      <button class="cat" data-cat="poultry">🍗 طيور</button>
+      <button class="cat" data-cat="trays">🥘 صواني</button>
+      <button class="cat" data-cat="sambousek">🥟 سمبوسك</button>
     </div>
+  </div>
 
-    <div class="notice-box">
-        <div class="notice-icon">💡</div>
-        <div class="notice-content">
-            <h4>معلومات هامة لعملائنا</h4>
-            <ul>
-                <li>أسعار الطيور واللحوم قابلة للتغيير حسب سعر اليوم.</li>
-                <li>يُرجى طلب الأوردر قبلها بيوم، ويوم الجمعة إجازة المطبخ.</li>
-                <li>أطباق الإطعام وتجهيز المناسبات والعزائم والأفراح بالحجز المسبق من 3 إلى 4 أيام.</li>
-                <li>متاح التوصيل داخل المقطم وخارجها.</li>
-            </ul>
-        </div>
+  <!-- Menu grid -->
+  <div class="menu-grid" id="menuGrid"></div>
+
+  <!-- Feast builder -->
+  <section class="feast">
+    <div class="feast-head">
+      <h3>🎯 جهّز <span class="grad">سفرتك</span></h3>
+      <p>من 2 لـ 1000 فرد — زكي هيحسبلك كل حاجة</p>
     </div>
-
-    <div class="contact-banner">
-        <div class="contact-info">
-            <h3>خلي الطعم علينا والأكل عليك ❤️</h3>
-            <p>للطلب والاستفسار — مطبخ سوبر محشي للأكل البيتي</p>
-        </div>
-        <a href="https://wa.me/201097457350" target="_blank" rel="noopener" class="contact-btn">
-            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413z"/></svg>
-            تواصل على واتساب
-        </a>
+    <div class="feast-grid">
+      <div class="f-control">
+        <label>عدد الأفراد <output id="guestsOut">6</output></label>
+        <input type="range" id="guestsRange" min="2" max="1000" value="6">
+      </div>
+      <div class="f-control">
+        <label>الميزانية <output id="budgetOut">1,200 ج</output></label>
+        <input type="range" id="budgetRange" min="300" max="200000" value="1200" step="100">
+      </div>
     </div>
+    <button class="feast-btn" id="feastBtn">✨ جهّزلي السفرة</button>
+    <div class="feast-result" id="feastResult"></div>
+  </section>
 
-    <p class="address-tag">📍 المقطم · الهضبة الوسطى · الحي الثاني · عند مدرسة الواحة</p>
+  <!-- Contact -->
+  <div class="contact">
+    <div>
+      <h3>محتاج مساعدة؟ كلّمنا ☎️</h3>
+      <p>للطلب والاستفسار — فريق سوبر محشي جاهز</p>
+    </div>
+    <a href="https://wa.me/201097457350" target="_blank" rel="noopener" class="contact-btn">
+      💬 01097457350
+    </a>
+  </div>
+
+  <p class="address">📍 المقطم · الهضبة الوسطى · الحي الثاني · عند مدرسة الواحة</p>
 </main>
 
-<footer>مطبخ سوبر محشي للأكل البيتي · جميع الأسعار بالجنيه المصري</footer>
+<footer>
+  مطبخ سوبر محشي <span class="heart">❤</span> جميع الأسعار بالجنيه المصري © 2025
+</footer>
 
-<a href="https://wa.me/201097457350" class="fab-whatsapp" target="_blank" rel="noopener" title="اطلب عبر واتساب">
-    <svg width="34" height="34" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413z"/></svg>
+<!-- FABs -->
+<button class="fab fab-ai" id="aiFab">🎙️ <span>كلّم زكي</span></button>
+<button class="fab fab-cart" id="cartFab" title="السلة">🛒<span class="badge-n" id="cartBadge">0</span></button>
+<a href="https://wa.me/201097457350" class="fab fab-wa" target="_blank" rel="noopener" title="واتساب">
+  <svg width="30" height="30" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654z"/></svg>
 </a>
+
+<!-- CART DRAWER -->
+<div class="overlay" id="overlay"></div>
+<aside class="cart" id="cartDrawer">
+  <div class="cart-head">
+    <h3>🛒 السلة</h3>
+    <button class="nav-btn" id="cartClose" style="width:36px;height:36px">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody"></div>
+  <div class="cart-foot">
+    <div class="cart-total"><span>الإجمالي</span><b id="cartTotal">0 ج.م</b></div>
+    <button class="cart-send" id="cartSend" disabled>📲 إرسال الطلب على واتساب</button>
+  </div>
+</aside>
+
+<!-- AI CHAT PANEL -->
+<div class="ai-panel" id="aiPanel">
+  <div class="ai-head">
+    <div class="ai-avatar" id="aiAvatar">🎙️</div>
+    <div class="ai-head-info">
+      <h4>زكي</h4>
+      <p id="aiStatus">
+        <span id="aiStatusText">متصل · جاهز أساعدك</span>
+        <span class="voice-indicator" id="voiceBars" style="display:none">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </span>
+      </p>
+    </div>
+    <div class="ai-head-actions">
+      <button class="ai-icon-btn" id="ttsBtn" title="تشغيل/إيقاف الصوت">🔊</button>
+      <button class="ai-icon-btn" id="aiClose">✕</button>
+    </div>
+  </div>
+  <div class="ai-speaking-banner" id="speakingBanner">
+    <div class="wave">
+      <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
+      <div class="w-bar"></div><div class="w-bar"></div>
+    </div>
+    <span>زكي بيتكلم دلوقتي…</span>
+    <button class="stop-btn" id="stopSpeakBtn">إيقاف</button>
+  </div>
+  <div class="voice-info" id="voiceInfo"></div>
+  <div class="ai-body" id="aiBody"></div>
+  <div class="ai-chips" id="aiChips"></div>
+  <form class="ai-form" id="aiForm">
+    <button type="button" class="send mic" id="aiMic" title="اتكلم بصوتك">🎤</button>
+    <input type="text" id="aiInput" placeholder="اتكلم معايا… أو اضغط المايك" autocomplete="off">
+    <button type="submit" class="send" title="إرسال">➤</button>
+  </form>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   HELPERS
+============================================================ */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const money=n=>(Math.round(n*100)/100).toLocaleString('en-US')+' ج.م';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const WA='201097457350',PHONE_DISPLAY='01097457350';
+const rand=a=>a[Math.floor(Math.random()*a.length)];
+const r2=n=>Math.round(n*4)/4;
+
+/* ============================================================
+   MENU DATA
+============================================================ */
+const CATS={mahshi:'محاشي',meat:'لحوم',poultry:'طيور',trays:'صواني',sambousek:'سمبوسك'};
+const MENU=[
+  {id:'mh1',cat:'mahshi',name:'محشي كرنب',desc:'ملفوف بعناية بخلطة المطبخ',emoji:'🥬',prices:[{label:'كيلو',price:140}]},
+  {id:'mh2',cat:'mahshi',name:'محشي ورق عنب',desc:'طازج بخلطة مميزة بالليمون',emoji:'🍃',prices:[{label:'كيلو',price:180}]},
+  {id:'mh3',cat:'mahshi',name:'محشي باذنجان',desc:'أبيض وأسود مقور طازج',emoji:'🍆',prices:[{label:'كيلو',price:140}]},
+  {id:'mh4',cat:'mahshi',name:'محشي كوسة',desc:'كوسة بلدي طازجة بالنعناع',emoji:'🥒',prices:[{label:'كيلو',price:150}]},
+  {id:'mh5',cat:'mahshi',name:'محشي فلفل',desc:'فلفل رومي بلدي مقور',emoji:'🫑',prices:[{label:'كيلو',price:130}]},
+  {id:'mh6',cat:'mahshi',name:'محشي مشكل',desc:'تشكيلة من أفضل المحاشي',emoji:'🍽️',prices:[{label:'كيلو',price:140}]},
+  {id:'mh7',cat:'mahshi',name:'ممبار بلدي محشي',desc:'مسلوق وجاهز للتحمير',emoji:'🌭',prices:[{label:'كيلو',price:280}]},
+  {id:'mt1',cat:'meat',name:'بفتيك بلدي متبل',desc:'جاهز للتحمير',emoji:'🥩',prices:[{label:'كيلو',price:650}]},
+  {id:'mt2',cat:'meat',name:'كفتة حاتي',desc:'جاهزة للشوي',emoji:'🍢',prices:[{label:'كيلو',price:360}]},
+  {id:'mt3',cat:'meat',name:'برجر لحم',desc:'جاهز للشوي',emoji:'🍔',prices:[{label:'كيلو',price:360}]},
+  {id:'mt4',cat:'meat',name:'كفتة أرز',desc:'جاهزة للتحمير',emoji:'🍡',prices:[{label:'كيلو',price:350}]},
+  {id:'mt5',cat:'meat',name:'كبيبة شامي',desc:'جاهزة للتحمير',emoji:'🥟',prices:[{label:'كيلو',price:350}]},
+  {id:'mt6',cat:'meat',name:'حواوشي',desc:'جاهز للحشو والتسوية',emoji:'🫓',prices:[{label:'كيلو',price:300}]},
+  {id:'py1',cat:'poultry',name:'جوز حمام محشي فريك',desc:'مسلوق للتحمير',emoji:'🕊️',prices:[{label:'جوز',price:370}]},
+  {id:'py2',cat:'poultry',name:'جوز حمام محشي أرز',desc:'مسلوق للتحمير',emoji:'🕊️',prices:[{label:'جوز',price:350}]},
+  {id:'py3',cat:'poultry',name:'ناجتس دجاج',desc:'جاهز للتحمير',emoji:'🍗',prices:[{label:'كيلو',price:340}]},
+  {id:'py4',cat:'poultry',name:'استربس دجاج',desc:'نصف قلية',emoji:'🍗',prices:[{label:'كيلو',price:360}]},
+  {id:'py5',cat:'poultry',name:'بانيه متبل',desc:'جاهز للتحمير',emoji:'🍗',prices:[{label:'كيلو',price:320}]},
+  {id:'py6',cat:'poultry',name:'شيش طاووق متبل',desc:'جاهز للشوي',emoji:'🍢',prices:[{label:'كيلو',price:320}]},
+  {id:'py7',cat:'poultry',name:'صدور فراخ متبلة',desc:'متبلة وجاهزة',emoji:'🍗',prices:[{label:'كيلو',price:320}]},
+  {id:'py8',cat:'poultry',name:'صدر دجاج مدخن',desc:'جاهز للتقديم',emoji:'🥓',prices:[{label:'2 صدر',price:300}]},
+  {id:'py9',cat:'poultry',name:'فرخة كاملة متبلة',desc:'جاهزة للشوي',emoji:'🍗',prices:[{label:'فرخة',price:320}]},
+  {id:'py10',cat:'poultry',name:'فرخة بلدي متبلة',desc:'جاهزة للسلق',emoji:'🐔',prices:[{label:'فرخة',price:300}]},
+  {id:'tr1',cat:'trays',name:'مكرونة بشاميل',desc:'بشاميل كريمي ولحم مفروم',emoji:'🍝',prices:[{label:'وسط',price:380},{label:'كبير',price:480}]},
+  {id:'tr2',cat:'trays',name:'نجرسكو',desc:'صدور دجاج بصوص أبيض',emoji:'🥘',prices:[{label:'وسط',price:380},{label:'كبير',price:480}]},
+  {id:'tr3',cat:'trays',name:'كوسة بالبشاميل',desc:'كوسة باللحمة والبشاميل',emoji:'🥒',prices:[{label:'وسط',price:380},{label:'كبير',price:480}]},
+  {id:'tr4',cat:'trays',name:'جلاش باللحمة',desc:'مورق بالسمن البلدي',emoji:'🥐',prices:[{label:'وسط',price:300},{label:'كبير',price:350}]},
+  {id:'tr5',cat:'trays',name:'رقاق باللحمة',desc:'بالقشطة والسمن',emoji:'🫓',prices:[{label:'كبير',price:400}]},
+  {id:'sb1',cat:'sambousek',name:'سمبوسك لحمة',desc:'لحم مفروم بالبهارات',emoji:'🥟',prices:[{label:'كيلو',price:350}]},
+  {id:'sb2',cat:'sambousek',name:'سمبوسك فراخ / ميكس جبن',desc:'دجاج أو أجبان',emoji:'🥟',prices:[{label:'كيلو',price:350}]},
+  {id:'sb3',cat:'sambousek',name:'سمبوسك كيري بالبسطرمة',desc:'مزيج كريمي بالبسطرمة',emoji:'🧀',prices:[{label:'كيلو',price:280}]},
+  {id:'sb4',cat:'sambousek',name:'سمبوسك جبنة',desc:'جبنة بيضاء خفيفة',emoji:'🧀',prices:[{label:'كيلو',price:250}]}
+];
+const BESTSELLERS=['mh6','tr1','py6','mt2','mh2'];
+const byId=id=>MENU.find(p=>p.id===id);
+const META={mh1:{veg:false,spicy:1,light:false,prep:'فرن',ingredients:['كرنب','أرز','لحمة'],allergens:[]},mh2:{veg:false,spicy:0,light:true,prep:'فرن',ingredients:['ورق عنب','أرز','لحمة'],allergens:[]},mh3:{veg:false,spicy:0,light:false,prep:'فرن',ingredients:['باذنجان','أرز','لحمة'],allergens:[]},mh4:{veg:false,spicy:0,light:true,prep:'فرن',ingredients:['كوسة','أرز','لحمة'],allergens:[]},mh5:{veg:false,spicy:1,light:true,prep:'فرن',ingredients:['فلفل','أرز','لحمة'],allergens:[]},mh6:{veg:false,spicy:1,light:false,prep:'فرن',ingredients:['محاشي مشكلة','أرز','لحمة'],allergens:[]},mh7:{veg:false,spicy:1,light:false,prep:'تحمير',ingredients:['ممبار','أرز'],allergens:[]},mt1:{veg:false,spicy:1,light:false,prep:'تحمير',ingredients:['لحم بقري'],allergens:[]},mt2:{veg:false,spicy:1,light:false,prep:'شوي',ingredients:['لحم مفروم','بصل'],allergens:[]},mt3:{veg:false,spicy:0,light:false,prep:'شوي',ingredients:['لحم مفروم'],allergens:[]},mt4:{veg:false,spicy:1,light:false,prep:'تحمير',ingredients:['لحم','أرز'],allergens:[]},mt5:{veg:false,spicy:0,light:false,prep:'تحمير',ingredients:['برغل','لحم','صنوبر'],allergens:['مكسرات']},mt6:{veg:false,spicy:1,light:false,prep:'فرن',ingredients:['لحم','فلفل'],allergens:[]},py1:{veg:false,spicy:0,light:true,prep:'تحمير',ingredients:['حمام','فريك'],allergens:['جلوتين']},py2:{veg:false,spicy:0,light:true,prep:'تحمير',ingredients:['حمام','أرز'],allergens:[]},py3:{veg:false,spicy:0,light:true,prep:'تحمير',ingredients:['دجاج','بقسماط'],allergens:['جلوتين']},py4:{veg:false,spicy:1,light:true,prep:'تحمير',ingredients:['دجاج','بقسماط'],allergens:['جلوتين']},py5:{veg:false,spicy:0,light:true,prep:'تحمير',ingredients:['دجاج','بقسماط'],allergens:['جلوتين']},py6:{veg:false,spicy:0,light:true,prep:'شوي',ingredients:['دجاج','زبادي','ليمون'],allergens:['لاكتوز']},py7:{veg:false,spicy:0,light:true,prep:'شوي',ingredients:['دجاج'],allergens:[]},py8:{veg:false,spicy:0,light:true,prep:'جاهز',ingredients:['دجاج مدخن'],allergens:[]},py9:{veg:false,spicy:0,light:false,prep:'شوي',ingredients:['فرخة'],allergens:['لاكتوز']},py10:{veg:false,spicy:0,light:false,prep:'سلق',ingredients:['فرخة بلدي'],allergens:[]},tr1:{veg:false,spicy:0,light:false,prep:'فرن',ingredients:['مكرونة','لحم','بشاميل','جبنة'],allergens:['جلوتين','لاكتوز']},tr2:{veg:false,spicy:0,light:false,prep:'فرن',ingredients:['مكرونة','دجاج','بشاميل'],allergens:['جلوتين','لاكتوز']},tr3:{veg:false,spicy:0,light:false,prep:'فرن',ingredients:['كوسة','لحم','بشاميل'],allergens:['لاكتوز']},tr4:{veg:false,spicy:0,light:false,prep:'فرن',ingredients:['جلاش','لحم'],allergens:['جلوتين']},tr5:{veg:false,spicy:0,light:false,prep:'فرن',ingredients:['رقاق','لحم','قشطة'],allergens:['جلوتين','لاكتوز']},sb1:{veg:false,spicy:1,light:false,prep:'تحمير',ingredients:['عجين','لحم'],allergens:['جلوتين']},sb2:{veg:false,spicy:0,light:false,prep:'تحمير',ingredients:['عجين','دجاج'],allergens:['جلوتين','لاكتوز']},sb3:{veg:false,spicy:0,light:false,prep:'تحمير',ingredients:['عجين','كيري','بسطرمة'],allergens:['جلوتين','لاكتوز']},sb4:{veg:true,spicy:0,light:true,prep:'تحمير',ingredients:['عجين','جبنة'],allergens:['جلوتين','لاكتوز']}};
+const meta=id=>META[id]||{};
+
+/* ============================================================
+   THEME
+============================================================ */
+const themeBtn=$('#themeBtn');
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  themeBtn.textContent=t==='dark'?'☀️':'🌙';
+  localStorage.setItem('sm_theme',t);
+}
+applyTheme(localStorage.getItem('sm_theme')||'light');
+themeBtn.onclick=()=>applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
+
+/* ============================================================
+   MENU RENDER
+============================================================ */
+const grid=$('#menuGrid');
+let activeCat='all',searchTerm='';
+function dishCard(p,i){
+  const prices=p.prices.map((pr,idx)=>`<button class="price-btn" data-id="${p.id}" data-idx="${idx}"><small>${esc(pr.label)}</small>${pr.price} ج</button>`).join('');
+  return `<article class="dish" data-cat="${p.cat}" data-name="${esc(p.name)} ${esc(p.desc)}" style="animation-delay:${Math.min(i*25,400)}ms">
+    <div class="dish-head">
+      <div class="dish-emoji">${p.emoji}</div>
+      <div class="dish-info">
+        <h3>${esc(p.name)}</h3>
+        <p>${esc(p.desc)}</p>
+        <span class="dish-tag">${CATS[p.cat]}</span>
+      </div>
+    </div>
+    <div class="dish-actions">${prices}</div>
+  </article>`;
+}
+function renderMenu(){grid.innerHTML=MENU.map(dishCard).join('');applyFilter();}
+function applyFilter(){$$('.dish',grid).forEach(c=>{const a=activeCat==='all'||c.dataset.cat===activeCat;const b=!searchTerm||c.dataset.name.includes(searchTerm);c.classList.toggle('hide',!(a&&b));});}
+$('#categories').addEventListener('click',e=>{const c=e.target.closest('.cat');if(!c)return;$$('.cat').forEach(x=>x.classList.remove('on'));c.classList.add('on');activeCat=c.dataset.cat;applyFilter();});
+$('#searchInput').addEventListener('input',e=>{searchTerm=e.target.value.trim();applyFilter();});
+
+/* ============================================================
+   CART
+============================================================ */
+let cart=[];try{cart=JSON.parse(localStorage.getItem('sm_cart')||'[]');}catch{cart=[];}
+const saveCart=()=>localStorage.setItem('sm_cart',JSON.stringify(cart));
+const cartCount=()=>cart.reduce((s,c)=>s+c.qty,0);
+const cartTotal=()=>cart.reduce((s,c)=>s+c.price*c.qty,0);
+function addToCart(id,idx=0,qty=1){const p=byId(id);if(!p)return;const v=p.prices[idx]||p.prices[0];const key=id+'|'+v.label;const f=cart.find(c=>c.key===key);if(f)f.qty+=qty;else cart.push({key,id,name:p.name,emoji:p.emoji,label:v.label,price:v.price,qty});saveCart();renderCart();renderCartFab();toast(`✅ اتضاف: ${p.name}`);}
+function changeQty(key,d){const item=cart.find(c=>c.key===key);if(!item)return;item.qty=Math.round((item.qty+d)*100)/100;if(item.qty<=0)cart=cart.filter(c=>c.key!==key);saveCart();renderCart();renderCartFab();}
+function fmtQty(c){if(c.label==='كيلو')return `${c.qty} كيلو`;if(c.qty===1)return c.label;return `${c.qty} × ${c.label}`;}
+function renderCart(){const b=$('#cartBody');if(!cart.length)b.innerHTML=`<div class="cart-empty"><span class="ce">🛒</span>السلة فاضية…<br>اختار من المنيو أو كلّم زكي</div>`;else b.innerHTML=cart.map(c=>`<div class="citem"><div class="citem-emoji">${c.emoji}</div><div class="citem-info"><h4>${esc(c.name)}</h4><p>${esc(fmtQty(c))} — <b>${money(c.price*c.qty)}</b></p></div><div class="qty"><button data-key="${esc(c.key)}" data-d="-1">−</button><span>${c.qty}</span><button data-key="${esc(c.key)}" data-d="1">+</button></div></div>`).join('');$('#cartTotal').textContent=money(cartTotal());$('#cartSend').disabled=!cart.length;}
+function renderCartFab(){const n=cartCount();$('#cartBadge').textContent=n;$('#cartFab').classList.toggle('on',n>0);}
+$('#cartBody').addEventListener('click',e=>{const b=e.target.closest('button[data-key]');if(!b)return;changeQty(b.dataset.key,+b.dataset.d);});
+$('#cartSend').addEventListener('click',()=>{if(!cart.length)return;const lines=['🛒 *طلب من سوبر محشي*',''];cart.forEach(c=>lines.push(`• ${c.name} (${fmtQty(c)}) = ${money(c.price*c.qty)}`));lines.push('',`💰 *الإجمالي: ${money(cartTotal())}*`,'','📍 العنوان: ','🕒 وقت الاستلام: ');window.open(`https://wa.me/${WA}?text=${encodeURIComponent(lines.join('\n'))}`,'_blank');});
+const drawer=$('#cartDrawer'),overlay=$('#overlay');
+const openCart=()=>{drawer.classList.add('on');overlay.classList.add('on');};
+const closeCart=()=>{drawer.classList.remove('on');overlay.classList.remove('on');};
+$('#cartFab').onclick=openCart;$('#cartClose').onclick=closeCart;overlay.onclick=closeCart;
+grid.addEventListener('click',e=>{const b=e.target.closest('.price-btn');if(!b)return;addToCart(b.dataset.id,+b.dataset.idx);b.classList.add('added');const old=b.innerHTML;b.innerHTML='<small>✓ اتضاف</small>';setTimeout(()=>{b.classList.remove('added');b.innerHTML=old;},900);});
+
+/* ============================================================
+   TOAST
+============================================================ */
+let toastTimer;
+function toast(msg,d=2200){const t=$('#toast');t.textContent=msg;t.classList.add('on');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('on'),d);}
+
+/* ============================================================
+   FEAST BUILDER
+============================================================ */
+const guestsRange=$('#guestsRange'),budgetRange=$('#budgetRange');
+const guestsOut=$('#guestsOut'),budgetOut=$('#budgetOut');
+function syncLabels(){guestsOut.textContent=guestsRange.value;budgetOut.textContent=Number(budgetRange.value).toLocaleString('en-US')+' ج';}
+guestsRange.oninput=syncLabels;budgetRange.oninput=syncLabels;syncLabels();
+function buildFeast(guests,budget){const picks=[];const push=(id,label,qty)=>{const p=byId(id);const v=p.prices.find(x=>x.label===label)||p.prices[0];picks.push({id,name:p.name,emoji:p.emoji,label:v.label,price:v.price,qty});};push('mh6','كيلو',r2(Math.max(0.5,guests*0.25)));push(guests>=10?'mt2':(guests>=6?'py6':'py5'),'كيلو',r2(Math.max(0.5,guests*0.2)));push('sb1','كيلو',r2(Math.max(0.25,guests*0.1)));if(guests>=8)push(guests>=14?'tr1':'tr4','كبير',1);const total=()=>picks.reduce((s,p)=>s+p.price*p.qty,0);let guard=0;while(total()>budget&&guard++<80){const kg=picks.filter(p=>p.label==='كيلو'&&p.qty>0.25).sort((a,b)=>b.price*b.qty-a.price*a.qty)[0];if(kg){kg.qty=r2(kg.qty-0.25);continue;}const big=picks.find(p=>p.label!=='كيلو'&&p.qty>1);if(big){big.qty--;continue;}picks.pop();if(!picks.length)break;}return picks.filter(p=>p.qty>0);}
+
+$('#feastBtn').addEventListener('click',()=>{
+  const guests=+guestsRange.value,budget=+budgetRange.value;
+  const box=$('#feastResult');
+  if(guests>20){
+    const deposit=Math.round(budget*0.3);
+    box.innerHTML=`<div class="fr-list" style="background:rgba(249,115,22,.1);border-color:rgba(249,115,22,.4)">
+      <div style="text-align:center;padding:12px 0 18px"><div style="font-size:3rem;margin-bottom:10px">🎉</div><h4 style="color:#fb923c;font-size:1.4rem;font-weight:900;margin-bottom:6px">عزومة ${guests} فرد — كبيرة أوي!</h4><p style="color:#a8a29e;font-size:.92rem">للأعداد فوق 20 فرد، بنجهزها بحجز خاص مباشر مع فريق المطبخ</p></div>
+      <div style="background:rgba(0,0,0,.3);border-radius:14px;padding:18px">
+        <div style="display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.1)"><span style="font-size:1.5rem">📞</span><div><div style="font-size:.78rem;color:#a8a29e;margin-bottom:2px">اتصل بينا</div><div style="color:#fb923c;font-weight:900;font-size:1.2rem;direction:ltr;text-align:right">${PHONE_DISPLAY}</div></div></div>
+        <div style="display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.1)"><span style="font-size:1.5rem">💰</span><div><div style="font-size:.78rem;color:#a8a29e;margin-bottom:2px">دفعة مقدمة</div><div style="color:#fff;font-weight:900">30% = ${money(deposit)} تقريباً</div></div></div>
+        <div style="display:flex;gap:14px;padding:10px 0"><span style="font-size:1.5rem">⏰</span><div><div style="font-size:.78rem;color:#a8a29e;margin-bottom:2px">الحجز المسبق</div><div style="color:#fff;font-weight:900">3-4 أيام على الأقل</div></div></div>
+      </div>
+      <p style="text-align:center;color:#fb923c;font-weight:900;margin-top:16px;font-size:1.05rem">📞 ${PHONE_DISPLAY}</p>
+    </div>
+    <div class="fr-actions" style="justify-content:center">
+      <a href="tel:${PHONE_DISPLAY}" class="btn-primary" style="text-decoration:none">📞 هتصل</a>
+      <a href="https://wa.me/${WA}?text=${encodeURIComponent(`عندي عزومة لـ ${guests} أفراد بـ ${budget} جنيه`)}" target="_blank" class="btn-secondary" style="text-decoration:none">💬 واتساب</a>
+    </div>`;
+    box.classList.add('show');box.scrollIntoView({behavior:'smooth',block:'nearest'});
+    return;
+  }
+  const plan=buildFeast(guests,budget);
+  const tot=plan.reduce((s,p)=>s+p.price*p.qty,0);
+  box.innerHTML=`<div class="fr-list"><div class="fr-row" style="border:none;padding-bottom:12px;font-weight:900;color:#fb923c"><b>سفرة ${guests} أفراد</b><span class="q">جاهزة ✨</span></div>${plan.map(p=>`<div class="fr-row"><b>${p.emoji} ${esc(p.name)}</b><span class="q">${p.label==='كيلو'?p.qty+' كيلو':p.qty+' × '+p.label}</span><span>${money(p.price*p.qty)}</span></div>`).join('')}<div class="fr-total"><span>الإجمالي</span><b>${money(tot)}</b></div></div><div class="fr-actions"><button class="btn-primary" id="feastAddAll">🛒 ضيفها للسلة</button><button class="btn-secondary" id="feastAsk">🎙️ اسأل زكي</button></div>`;
+  box.classList.add('show');
+  $('#feastAddAll').onclick=()=>{plan.forEach(p=>{const prod=byId(p.id);const idx=prod.prices.findIndex(x=>x.label===p.label);addToCart(p.id,idx<0?0:idx,p.qty);});openCart();};
+  $('#feastAsk').onclick=()=>{openAI();sendUserMessage(`عندي عزومة لـ ${guests} أفراد وميزانيتي ${budget} جنيه`);};
+  box.scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+
+/* ============================================================
+   🎙️ VOICE ENGINE — TTS + STT
+============================================================ */
+const synth = window.speechSynthesis;
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let egyptianVoice = null;
+let ttsEnabled = localStorage.getItem('sm_tts') !== 'off';
+let voicesLoaded = false;
+
+// Load voices
+function loadVoices() {
+  if (!synth) return;
+  const voices = synth.getVoices();
+  if (!voices.length) return;
+  
+  // Priority: ar-EG > ar-SA > any ar
+  egyptianVoice = 
+    voices.find(v => /ar[-_]EG/i.test(v.lang)) ||
+    voices.find(v => /ar[-_]SA/i.test(v.lang)) ||
+    voices.find(v => /^ar/i.test(v.lang)) ||
+    null;
+  
+  voicesLoaded = true;
+  updateVoiceUI();
+  console.log('[TTS] Selected voice:', egyptianVoice ? `${egyptianVoice.name} (${egyptianVoice.lang})` : 'No Arabic voice available');
+}
+
+if (synth) {
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+  setTimeout(loadVoices, 500);
+  setTimeout(loadVoices, 1500);
+}
+
+function updateVoiceUI() {
+  const info = $('#voiceInfo');
+  const btn = $('#ttsBtn');
+  
+  btn.classList.toggle('muted', !ttsEnabled);
+  btn.textContent = ttsEnabled ? '🔊' : '🔇';
+  btn.title = ttsEnabled ? 'الصوت شغال — اضغط للكتم' : 'الصوت مقفول — اضغط للتشغيل';
+  
+  if (ttsEnabled && !egyptianVoice && voicesLoaded) {
+    info.textContent = '⚠️ مفيش صوت عربي على جهازك — الصوت هيشتغل بصوت افتراضي. جرب تثبيت صوت عربي من إعدادات الجهاز.';
+    info.className = 'voice-info warning on';
+  } else if (ttsEnabled && egyptianVoice) {
+    const isEG = /ar[-_]EG/i.test(egyptianVoice.lang);
+    info.innerHTML = `🎙️ زكي بيتكلم${isEG ? ' بصوت مصري' : ' بالعربي'} <span style="opacity:.7">(${egyptianVoice.name})</span>`;
+    info.className = 'voice-info on';
+    setTimeout(()=>{info.classList.remove('on')}, 5000);
+  } else {
+    info.classList.remove('on');
+  }
+}
+
+// Clean text for speech (strip HTML, emojis, markers)
+function cleanForSpeech(html) {
+  if (!html) return '';
+  let text = html
+    .replace(/<br\s*\/?>/gi, '. ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\*([^*]+)\*/g, '$1');
+  
+  // Remove all emojis using Unicode property escape
+  try {
+    text = text.replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, '');
+  } catch(e) {
+    text = text.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{27BF}]/gu, '');
+  }
+  
+  // Remove remaining special chars
+  text = text
+    .replace(/[💰📞📍⏰📋✦✓✅🔊🎙️🎤➤•·☆★◦▫▪]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  
+  return text;
+}
+
+// Speak function with chunking
+function speak(html) {
+  if (!ttsEnabled || !synth) return;
+  
+  // Cancel any ongoing speech
+  synth.cancel();
+  
+  // If contains chat-prods, only speak text before it
+  let speechHTML = html;
+  const prodIndex = speechHTML.indexOf('chat-prods');
+  if (prodIndex > -1) {
+    // Find where the product list HTML starts (approximate)
+    const cut = speechHTML.lastIndexOf('<div class="chat-prods', prodIndex);
+    if (cut > 0) speechHTML = speechHTML.substring(0, cut) + '. التفاصيل تحت.';
+  }
+  
+  const text = cleanForSpeech(speechHTML);
+  if (!text || text.length < 2) return;
+  
+  // Truncate very long text
+  const finalText = text.length > 500 ? text.substring(0, 500) + '... والمزيد' : text;
+  
+  // Split into chunks (some browsers have limits ~200 chars)
+  const chunks = [];
+  let current = '';
+  const sentences = finalText.split(/(?<=[.!?؟])\s+/);
+  
+  for (const s of sentences) {
+    if ((current + ' ' + s).length > 200 && current) {
+      chunks.push(current.trim());
+      current = s;
+    } else {
+      current += ' ' + s;
+    }
+  }
+  if (current.trim()) chunks.push(current.trim());
+  
+  let i = 0;
+  function speakNext() {
+    if (i >= chunks.length) {
+      updateSpeakingUI(false);
+      return;
+    }
+    
+    const utter = new SpeechSynthesisUtterance(chunks[i]);
+    utter.lang = 'ar-EG';
+    utter.rate = 0.95;
+    utter.pitch = 1.0;
+    utter.volume = 1.0;
+    if (egyptianVoice) utter.voice = egyptianVoice;
+    
+    utter.onstart = () => { if (i === 0) updateSpeakingUI(true); };
+    utter.onend = () => { i++; speakNext(); };
+    utter.onerror = (e) => {
+      console.warn('[TTS] error:', e);
+      if (i === 0) updateSpeakingUI(false);
+    };
+    
+    synth.speak(utter);
+  }
+  
+  speakNext();
+}
+
+function stopSpeaking() {
+  if (synth) {
+    synth.cancel();
+    updateSpeakingUI(false);
+  }
+}
+
+function updateSpeakingUI(speaking) {
+  const banner = $('#speakingBanner');
+  const bars = $('#voiceBars');
+  const statusText = $('#aiStatusText');
+  const ttsBtn = $('#ttsBtn');
+  
+  banner.classList.toggle('on', speaking);
+  bars.style.display = speaking ? 'inline-flex' : 'none';
+  statusText.textContent = speaking ? 'زكي بيتكلم…' : 'متصل · جاهز أساعدك';
+  ttsBtn.classList.toggle('speaking-active', speaking);
+}
+
+// TTS toggle button
+$('#ttsBtn').addEventListener('click', () => {
+  ttsEnabled = !ttsEnabled;
+  localStorage.setItem('sm_tts', ttsEnabled ? 'on' : 'off');
+  if (!ttsEnabled) stopSpeaking();
+  updateVoiceUI();
+  toast(ttsEnabled ? '🔊 الصوت اتشغل' : '🔇 الصوت اتقفل');
+});
+
+// Stop speaking button
+$('#stopSpeakBtn').addEventListener('click', stopSpeaking);
+
+/* ============================================================
+   🧠 AI BRAIN — Zaki (Modern Egyptian persona)
+============================================================ */
+function norm(s){return String(s).replace(/[\u064B-\u0652\u0670\u0640]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/[^\u0621-\u064A0-9a-zA-Z\s\.\?!]/g,' ').replace(/\s+/g,' ').trim();}
+function getTimeGreeting(){const h=new Date().getHours();if(h<12)return 'صباح الفل';if(h<17)return 'نهارك سعيد';if(h<21)return 'مساء الخير';return 'مساء الفل';}
+function isFriday(){return new Date().getDay()===5;}
+
+const CONV={prefs:{name:null,veg:null,spicy:null,light:null,budget:null,guests:null,lastDish:null,lastPlan:null,pendingOrder:null},topics:[],turn:0,visitCount:parseInt(localStorage.getItem('sm_visits')||'0')+1};
+localStorage.setItem('sm_visits',CONV.visitCount);
+
+/* Modern Egyptian openers for Zaki */
+const OPENERS={
+  neutral:['بص يا معلم، ','خليني أقولك، ','بصراحة كده، ','الحقيقة، ','على فكرة، ','بالمناسبة، ','لو تسألني، ','من الآخر، ','أنا شايف، ','والله، ','شوف، ','من رأيي، ','صدقني، ','خدها مني، ','على فكرة يعني، ','بكل صراحة، ','كلام بينا، ','بيني وبينك، '],
+  warm:['يا هلا! ','أهلاً بيك! ','نوّرت! ','يا صديقي، ','ربنا يخليك، ','تسلم، ','من قلبي، ','بكل ود، ','نورت المكان، ','يا مية أهلاً، ','أنا مبسوط، ','بكل حب، ','تحت أمرك، ','من عيني، ','على راسي، ','على الرحب، ','ده واجبي، ','منور يا غالي، '],
+  excited:['يا سلام! ','أيوة كده! ','الله! ','ما شاء الله! ','جامد والله! ','عظمة! ','كده الكلام! ','يلا بينا! ','حبيت! ','تمام التمام! ','عال العال! ','تحفة! ','روعة! ','جميل جداً! ','ده كلام كبير! ','إيه الحلاوة دي! ','شغل العضماء! ','أيوة يا معلم! '],
+  thoughtful:['خليني أفكر معاك، ','دقيقة أظبط، ','بحسبها كده، ','في نقطة مهمة، ','شدني سؤالك، ','فكرتني بحاجة، ','خليني أظبط الوضع، ','دعني أفكر، ','سؤال مهم، ','بفكر في حاجة، ','في نقطة لازم نوضحها، ','خليني أحسبها، ','من خبرتي، ','إيه رأيك لو، ','خلينا نفكر سوا، ','لحظة أفكر، ','بشوف الموضوع، ','من وجهة نظري، '],
+  casual:['بص، ','خلاص، ','أها، ','طب، ','يا عم، ','يا صاحبي، ','يسطا، ','على العموم، ','باختصار، ','المهم، ','المختصر، ','يعني إيه، ','حاجة كده، ','على طول، ','بالسريع، ','على الماشي، ','بدون تعقيد، ','عادي خالص، ','كده كده، ','بالمختصر، ','على بلاطة، '],
+  empathetic:['حاسس بيك والله، ','فاهمك، ','قلبي معاك، ','الله يعينك، ','أنا هنا معاك، ','متقلقش، ','خليني أساعدك، ','افتكر إنك مش لوحدك، ','أنا فاهم شعورك، ','الله يكون في عونك، ','أنا حاسس بيك، ','صعبان عليّا، ','أنا معاك دايماً، ','خدها بالراحة، ','أنا هنا لو احتاجت، ','مش لوحدك، ','خد وقتك، ','ارتاح شوية، ','أنا سامعك، ','قولي إيه اللي مضايقك، '],
+  playful:['هههه، ','بضحك معاك، ','بس بجد، ','بص على المقلب، ','استنى بس، ','يلا بينا، ','طيب شوف، ','شد حيلك، ','خد بالك، ','بيني وبينك، ','بسرك كده، ','من غير زعل، ','بضحك يعني، ','سر بيني وبينك، ','خليها بينا، ','حاجة كده، ','بالهنا، ','كلام بينا، ','على خفيف، ','بمزاج، '],
+  wise:['زي ما بيقولوا، ','القاعدة عندنا، ','من خبرتي، ','اللي اتعلمته، ','من واقع الحياة، ','زي المثل، ','خد الحكمة، ','زي الأسلاف، ','علمونا، ','كلام الكبار، ','في حكمة، ','القاعدة، ','المبدأ، ','من الحكمة، ','زي ما قالوا، ','من الأمثال، ','حكمة زمان، ','خدها نصيحة، ']
+};
+
+const CLOSERS={
+  inviting:['تحب نكمل بإيه؟','أنا هنا لو محتاج حاجة.','تحب أرشحلك حاجة؟','قوللي عايز إيه.','مستعد أساعدك.','تحب نروح للطلب؟','يلا شوف المنيو وقولي.','قوللي وإحنا نظبط.','مستني رأيك.','قولي عايز إيه.','تحب نبدأ بإيه؟','أنا معاك على طول.','قوللي بس.','عايز إيه تاني؟','ابدأ وأنا متابعك.','تحب نروح في اتجاه تاني؟'],
+  warm:['وأنا تحت أمرك دايماً.','ربنا يخليك.','كلامك ده بيبسطني.','أنا هنا عشانك.','مستني كلامك.','ربنا يكرمك.','قلبي معاك.','أنا في خدمتك.','على الرحب والسعة.','أنا معاك دايماً.','أنا هنا لو احتجت.','وجودك يسعدني.','أنا معاك في أي وقت.','قوللي وأنا أظبط.','على راسي والله.'],
+  casual:['خد وقتك.','عادي خالص.','ولا يهمك.','على راحتك.','ماشي؟','تمام كده؟','قوللي بس.','على طول.','بالسريع.','خلاص كده.','ماشي الحال.','عادي يعني.','على بلاطة.','كده كده.','بالساهل.'],
+  thoughtful:['فكر كده وقولي.','شوف المناسب ليك.','قرارك في الآخر.','أنا عرضت وانت اختار.','قوللي إيه رأيك.','خد وقتك في التفكير.','أنا في انتظار قرارك.','اختار اللي يريحك.','فكر وقرر.','أنا هنا لو محتاج توضيح.','قوللي رأيك بصراحة.','شوف وانت الحكم.','بص وشوف بنفسك.','عايز تفاصيل أكتر؟','محتاج حاجة توضيح؟']
+};
+
+const FILLERS=['بيني وبينك، ','صراحة كده، ','على فكرة، ','بالمناسبة، ','زي ما بيقولوا، ','عشان أكون صريح، ','زي أي حد، ','لو هنتكلم بجد، ','بس خليني أقولك، ','الحقيقة، ','بصراحة، ','بكل صدق، ','من غير مبالغة، ','من واقع تجربتي، ','خدها مني، ','بصراحة يعني، ','في الحقيقة، ','كلام بينا، ','من خبرتي، ','بعد ما فكرت، '];
+const PROVERBS=['زي ما بيقولوا: القرش الأبيض لليوم الأسود.','والنبي الأكل البيتي مفيش زيه.','العين بتاكل الأول.','اللي يفتح بيته للكرم ما يخافش.','اللي استحوا ماتوا.','الجار قبل الدار.','اللي فات مات.','القناعة كنز لا يفنى.','كل تأخيرة وفيها خيرة.','الحلو ما يكملش.','الصبر مفتاح الفرج.','اللي يزرع يحصد.','إيد واحدة ما تصقفش.','العجلة من الشيطان.','الوقت من ذهب.'];
+const REACTIONS=['والله؟ ','يا سلام! ','بجد؟ ','ما شاء الله! ','الله! ','حلو! ','أيوة كده! ','عال العال! ','ده كلام! ','تمام! ','تحفة! ','جامد! ','حبيبي! ','كلام كبير! ','خد بالك! ','استنى! '];
+const TAG_QUESTIONS=['مش كده؟','صح؟','إيه رأيك؟','خدت بالك؟','كلامي صح؟','ولا إيه؟','ماشي كده؟','تمام كده؟','عجبك؟','تمام؟'];
+const EMOJIS=[' 😊',' 🌹',' ✨',' 💚',' 👌',' 😋',' 🍲',' 🌿',' 💫',' 🎯',' 🤝',' ☕',' 🌟',' 💯',' 🎉',' 😄',' 😉',' 👍',' ✅',' 🔥',' 🥰',' 🎊',' 🌺',' 💐'];
+
+function render(tpl,ctx={}){return String(tpl).replace(/\{(\w+)\}/g,(m,k)=>{if(ctx[k]!==undefined)return ctx[k];if(k==='name')return CONV.prefs.name||'يا صاحبي';if(k==='phone')return PHONE_DISPLAY;if(k==='greet')return getTimeGreeting();return m;});}
+function compose(openerType,body,closerType,useFiller){
+  const parts=[];
+  if(openerType)parts.push(rand(OPENERS[openerType]||OPENERS.neutral));
+  if(Math.random()<0.35)parts.push(rand(FILLERS));
+  if(Math.random()<0.08)parts.push(rand(REACTIONS));
+  parts.push(body);
+  if(Math.random()<0.18)parts.push(' '+rand(TAG_QUESTIONS));
+  if(Math.random()<0.06)parts.push(' '+rand(PROVERBS));
+  if(closerType)parts.push(' '+rand(CLOSERS[closerType]||CLOSERS.inviting));
+  if(Math.random()<0.3)parts.push(rand(EMOJIS));
+  return parts.join('').trim();
+}
+function safeName(){return esc(CONV.prefs.name)||'يا صاحبي';}
+
+const BODIES={
+  greet:[
+    `أنا {greet} يا {name}! أنا زكي، مساعدك الذكي في سوبر محشي. عايز إيه النهاردة؟`,
+    `يا هلا بيك! أنا زكي، تحت أمرك في أي وقت. تحب أرشحلك حاجة؟`,
+    `{greet}! أنا زكي. قوللي إيه اللي في دماغك وأنا أظبطك.`,
+    `أهلاً! أنا زكي، مساعدك. عايز نبدأ بإيه؟`,
+    `نوّرت! أنا زكي، في خدمتك. تحب تشوف المنيو ولا أرشحلك حاجة؟`,
+    `{greet} يا صاحبي! أنا زكي. جعان؟`,
+    `يا هلا! أنا زكي، مساعدك الذكي. عايز إيه؟`,
+    `أهلاً بيك! أنا زكي. تحب أساعدك في إيه؟`,
+    `{greet}! أنا هنا. قوللي عايز إيه.`,
+    `يا مية أهلاً! أنا زكي. تحت أمرك.`
+  ],
+  howAreYou:[
+    `أنا بخير الحمدلله، بشتغل وبجهز أحلى سفرة. وانت عامل إيه؟`,
+    `تمام الحمدلله! المطبخ شغال والريحة وصلتلك؟`,
+    `زي الفل! مستعد أساعدك.`,
+    `بخير الحمدلله! جاهز أخدمك.`,
+    `أنا بخير، شكراً لسؤالك.`,
+    `كويس الحمدلله، بشتغل على طلبات النهاردة.`,
+    `تمام التمام! المطبخ زي النحل.`
+  ],
+  whoAreYou:[
+    `أنا *زكي* — مساعدك الذكي في مطبخ سوبر محشي. بفهمك، بسمعك، وبحسبلك على مزاجك.`,
+    `أنا زكي، المساعد الذكي بتاع سوبر محشي. بفكر معاك، برشحلك، وبجهزلك طلباتك.`,
+    `أنا زكي! مش بوت مخزن — بفهمك وبسمعك وبرد عليك زي أي حد.`,
+    `اسمي زكي، شغلتي إني أظبطك. من الأكل للعزومة، كله تحت إيدي.`,
+    `أنا زكي — يعني مساعدك الشخصي في المطبخ.`
+  ],
+  joke:[
+    '😄 مرة واحد راح يشتري محشي، البياع قاله "عايز كام كيلو؟" قاله "على قد اللي في قلبي". راح البياع قاله "يعني القالب اللي في البيت كله" 😂',
+    '😂 مرة واحد بيقول لمراته "هاتي المحشي" قالتله "مفيش". قالها "طب هاتي اللي فيه". قالتله "مفيش". قالها "يبقى هاتي الفويل" 🤣',
+    '😆 مرة واحد بيسأل صاحبه "ايه أحلى حاجة في المحشي؟" قاله "إنه بيتلم" 😂',
+    '🙈 مرة الكوسة والكرنب اتخانقوا، قال الكوسة "أنا أطول منك" قال الكرنب "أنا ملفوف والسلام" 😂',
+    '😄 واحد راح يشتري ورق عنب، البياع قاله "عايز كام" قاله "على أد اللي في قلبي". راح البياع قاله "خد 20 كيلو" 😂'
+  ],
+  thanks:[
+    `العفو يا {name}! تحت أمرك في أي وقت.`,
+    `تسلم! ربنا يخليك.`,
+    `على الرحب والسعة.`,
+    `أي خدمة.`,
+    `شكراً ليك انت كمان!`,
+    `العفو والله.`,
+    `أنا مبسوط إنك مبسوط.`
+  ],
+  bye:[
+    `نوّرت! مستنينك تاني.`,
+    `مع السلامة يا {name}.`,
+    `خليك بخير.`,
+    `تصبح على خير.`,
+    `في أمان الله.`,
+    `بايباي.`
+  ],
+  compliment:[
+    `ربنا يخليك!`,
+    `شكراً يا {name}!`,
+    `تسلم!`,
+    `الله يخليك!`,
+    `كلامك ده بيبسطني.`
+  ],
+  complain:[
+    `أنا آسف جداً لو حصل تقصير.`,
+    `معلش يا {name}، حقك عليّا.`,
+    `آسف على التجربة دي.`,
+    `معلش والله.`,
+    `حقك عليّا.`
+  ],
+  cantDecide:[
+    `محتار؟ أنا معاك! قوللي: بتحب محاشي ولا لحوم ولا فراخ ولا صواني؟`,
+    `ولا يهمك، هنختار سوا. عايز حاجة خفيفة ولا دسمة؟`,
+    `أنا هنا عشان أسهّلك القرار.`,
+    `محتار في إيه بالظبط؟`,
+    `اسألني "رشحلي" وأنا أختار.`,
+    `عادي خالص. قوللي بس حاجة واحدة: نباتي ولا لحوم؟`
+  ],
+  cheap:[
+    `دي أرخص الأصناف عندنا وطعمها مش أرخص خالص 😄`,
+    `ميزانية على القد؟ عندنا حاجات حلوة.`,
+    `أرخص حاجة عندنا هي الكرنب. تحب تجربه؟`,
+    `مش لازم تدفع كتير عشان تاكل حلو.`
+  ],
+  expensive:[
+    `لو عايز حاجة فاخرة أوي، دي أحلى وأفخم اللي عندنا.`,
+    `عايز تدلع نفسك؟ دي اختياراتنا الفاخرة:`,
+    `للحاجات الفخمة، البفتيك بتاعنا حكاية.`
+  ],
+  recommend:[
+    `دي أحلى ترشيحاتي وأكثر الأصناف اللي بتتطلب عندنا ⭐`,
+    `لو تسألني أنا شخصياً، دي أحلى حاجة عندنا:`,
+    `بعد سنين في المطبخ، دي الحاجات اللي أنصح بيها:`,
+    `كل حاجة عندنا حلوة، بس دي اللي الناس بتحبها أكتر:`,
+    `أنا شخصياً بحب المحشي المشكل.`,
+    `لو هختار حاجة لنفسي، البشاميل.`,
+    `الشيش طاووق بتاعنا مش زي أي شيش.`,
+    `أنا بعشق ورق العنب 😄`
+  ],
+  delivery:[
+    `بنوصّل داخل المقطم وخارجها. ابعتلنا عنوانك على واتساب.`,
+    `أيوه بنوصّل. رسوم التوصيل حسب المنطقة.`,
+    `التوصيل متاح للمقطم وخارجها.`
+  ],
+  hours:[
+    `بنستقبل الأوردرات طول الأسبوع ما عدا *الجمعة إجازة*.`,
+    `شغلنا من السبت للخميس.`,
+    `بنفتح من الصبح لحد بالليل، ما عدا الجمعة.`
+  ],
+  friday:[
+    `الجمعة إجازة رسمية للمطبخ.`,
+    `يوم الجمعة المطبخ مقفول.`,
+    `الجمعة إجازة.`
+  ],
+  address:[
+    `المقطم · الهضبة الوسطى · الحي الثاني · عند مدرسة الواحة.`
+  ],
+  payment:[
+    `بنقبل الكاش والمحافظ الإلكترونية (فودافون كاش / إنستاباي).`
+  ],
+  events:[
+    `بنجهّز المناسبات والأفراح بالحجز المسبق من *3 لـ 4 أيام*.`
+  ],
+  readyToCook:[
+    `كل أصنافنا *جاهزة على التسوية* — متبّلة ومحضّرة.`
+  ],
+  menu:[
+    `دي قائمة المنيو كاملة. اختار اللي يعجبك.`,
+    `المنيو عندنا كالتالي.`,
+    `دي الأصناف المتاحة.`
+  ],
+  allergy:[
+    `قلقان من حساسية؟ أنا أقولك الأصناف الآمنة.`,
+    `مهم جداً موضوع الحساسية.`,
+    `الأمان أولاً.`
+  ],
+  feastSmall:[
+    `عزومة؟ أبشر! قوللي عدد الأفراد والميزانية.`,
+    `سفرة؟ أنا تحت أمرك.`,
+    `عزومة، دي شغلتي.`
+  ],
+  cartView:[
+    `دي سلتك الحالية.`,
+    `سلتك تحت.`,
+    `دي اللي في السلة.`
+  ],
+  football:[
+    `الكورة دي حكاية! أنا شخصياً مش بشجع فريق معين — أنا بشجع الأكل الحلو 😄`,
+    `أنا مش متابع الكورة أوي. أنا متابع المطبخ أكتر!`
+  ],
+  life:[
+    `الله يعينك على شغلك. لو محتاج بريك أنا هنا.`,
+    `الشغل ما بيخلصش. خد بريك صغير.`
+  ],
+  family:[
+    `ربنا يخليلك أهلك. العيلة دي نعمة والله.`,
+    `ربنا يباركلك فيهم.`
+  ],
+  weekend:[
+    `الويك اند ده وقت الراحة 😎 تحب تعمله إيه؟`,
+    `الويك اند أهم حاجة فيه إنك ترتاح.`
+  ],
+  foodMemory:[
+    `والله الأكل البيتي ده بيفكرني بأيام حلوة.`,
+    `ريحة المحشي بتفكرني بالعزومات زمان.`
+  ],
+  meta:[
+    `أنا زكي — يعني بفهمك، بسمعك، وبحس بيك.`,
+    `أنا المساعد الذكي بتاع سوبر محشي.`,
+    `بص يا صاحبي، أنا مش هقولك "أنا آلة" وخلاص — أنا هنا عشان أساعدك.`,
+    `أنا مساعدك في المطبخ. مش بوت مخزن.`
+  ],
+  insult:[
+    `معلش يا صاحبي. لو زعلتك في حاجة، آسف.`,
+    `حقك عليّا. أنا هنا عشان أساعدك.`,
+    `آسف لو مش عاجبك.`
+  ],
+  clarify:[
+    `معلش مفهمتش قصدك بالظبط. جرب تقوللي تاني.`,
+    `مش متأكد إني فهمت صح.`,
+    `معلش، ممكن توضحلي أكتر؟`
+  ]
+};
+
+const EMPATHY={
+  sad:['قلبي معاك والله. ربنا يهونها عليك.','حاسس بيك. الدنيا فيها أيام صعبة.','ربنا يهون عليك.'],
+  angry:['معلش يا صاحبي. خد نفس عميق.','حاسس بغضبك.','فاهمك.'],
+  tired:['الله يعينك.','خد بريك يا صاحبي.','حاسس بيك.'],
+  happy:['ما شاء الله عليك!','الحمدلله!','ربنا يديمها عليك.'],
+  stressed:['الله يعينك.','فاهم ضغطك والله.','حاسس بيك.'],
+  confused:['معلش. الخلط طبيعي.','فاهمك.','ولا يهمك.'],
+  excited:['الطاقة دي حلوة والله!','ما شاء الله!','حبيت الحماس ده!'],
+  love:['ربنا يخليك يا صاحبي.','تسلملي والله.','وانت كمان يا غالي.']
+};
+
+const SMALL_TALK=[
+  {re:/(اهلي|زمالك|الاهلي|الزمالك|كورة|ماتش|دوري|كأس|ملعب|لاعب)/,bodies:BODIES.football},
+  {re:/(شغلي|شغل|الدراسه|المدرسه|الجامعه|امتحانات|شغلانه|مشغول|مشغوله|ورق|اجتماعات|مديري)/,bodies:BODIES.life},
+  {re:/(الوالده|الوالد|امي|ابويا|مراتي|جوزي|عيالي|اولادي|اخويا|اختيا|الاهل|العيله|ماما|بابا)/,bodies:BODIES.family},
+  {re:/(الويك اند|الويكند|عطله|اجازه|ويكند)/,bodies:BODIES.weekend},
+  {re:/(زمان|فاكر|بتفكرني|ريحه|طعم|ايام|ذكريات)/,bodies:BODIES.foodMemory}
+];
+
+const DISH_KW={'كرنب':'mh1','ملفوف':'mh1','ورق عنب':'mh2','ورق':'mh2','باذنجان':'mh3','بتنجان':'mh3','كوسه':'mh4','فلفل':'mh5','ممبار':'mh7','مشكل':'mh6','بفتيك':'mt1','كفته':'mt2','برجر':'mt3','حواوشي':'mt6','حمام':'py1','فريك':'py1','ناجتس':'py3','استربس':'py4','بانيه':'py5','شيش':'py6','طاووق':'py6','صدور':'py7','صدر':'py7','مدخن':'py8','فرخه':'py9','دجاجه':'py9','بشاميل':'tr1','مكرونه':'tr1','نجرسكو':'tr2','جلاش':'tr4','رقاق':'tr5','سمبوسه':'sb1','سمبوسك':'sb1','كيري':'sb3','بسطرمه':'sb3','جبنه':'sb4'};
+const CAT_KW={mahshi:['محشي','محاشي','كرنب','ورق','باذنجان','كوسه','فلفل','ممبار','مشكل'],meat:['لحم','لحوم','لحمه','كفته','بفتيك','برجر','كبيه','حواوشي','بقري'],poultry:['فراخ','دجاج','طيور','حمام','بانيه','شيش','طاووق','ناجتس','استربس','صدور','فريك'],trays:['صواني','صينيه','فرن','بشاميل','نجرسكو','جلاش','رقاق','طاجن','مكرونه'],sambousek:['سمبوسك','سمبوسه','مقبلات','كيري','بسطرمه','جبنه']};
+
+function findDishes(t){const f=[],s=new Set();for(const p of MENU){const pn=norm(p.name);if(t.includes(pn)&&!s.has(p.id)){f.push(p);s.add(p.id);}}for(const [kw,id] of Object.entries(DISH_KW)){if(t.includes(kw)&&!s.has(id)){f.push(byId(id));s.add(id);}}return f;}
+function extract(t){const ex={numbers:(t.match(/\d+(?:\.\d+)?/g)||[]).map(Number),guests:null,budget:null,qty:null,dish:null,dishes:[],cat:null,negated:/(^|\s)(مش|مب|ما)\s|مش بحب|مب عايز|مش عايز|ما بحب/.test(t),isQuestion:/(\?|؟|^(ايه|كام|فين|امتى|هل|ازاي|ليه|مين|عندك|عندكم|ايه رايك))/.test(t),text:t,name:null};const nm=t.match(/(?:اسمي|انا اسمي)\s+([\u0621-\u064A]{2,15})/);if(nm&&!DISH_KW[nm[1]]&&!['عايز','عندي','محتار','مش','محتاج','مبسوط','تعبان'].includes(nm[1]))ex.name=nm[1];const g=t.match(/(\d{1,4})\s*(فرد|افراد|اشخاص|نفر|ضيوف|شخص|ضيف)/);if(g)ex.guests=+g[1];const bc=ex.numbers.filter(n=>n>=100&&n!==ex.guests);if(bc.length)ex.budget=Math.max(...bc);const qm=t.match(/(نص|نصف|ربع)\s*(كيلو|كجم)?/);if(qm){ex.qty=(qm[1]==='ربع')?0.25:0.5;}else{const qm2=t.match(/(\d+(?:\.\d+)?)\s*(كيلو|كجم)/);if(qm2)ex.qty=+qm2[1];else if(/(كيلو|كجم)/.test(t))ex.qty=1;}ex.dishes=findDishes(t);if(ex.dishes.length)ex.dish=ex.dishes[0];for(const [cat,words] of Object.entries(CAT_KW)){if(words.some(w=>t.includes(w))){ex.cat=cat;break;}}return ex;}
+
+const EMO={sad:/(حزين|زعلان|مضايق|مخنوق|متضايق|مش مبسوط|مكتئب|قلبي وجع|وجع|هم|غم|دموع|بكيت|اكتئاب|خسرت|فراق)/,angry:/(غضبان|مش طايق|عصبي|قرف|مش عاجبني|ظلم|حرام|زهقت)/,tired:/(مرهق|تعبان|مش قادر|منهك|مريض|عيا|نعسان)/,happy:/(مبسوط|فرحان|سعيد|الحمد|تمام|عسل|رائع|ممتاز|فرح|نجحت|اتجوزت|خطبت)/,stressed:/(متوتر|مضغوط|قلقان|مش فاضي|مزنوق|مفيش وقت|مشغول|شغل كتير|امتحانات)/,confused:/(محتار|مش فاهم|تايه|لخبطه)/,excited:/(متحمس|يلا بينا|هيا|مستني|هبدأ)/,love:/(بحبك|حبيبي|قلبي انت|انت عسل|تسلملي|ربي يحميك|خليك معايا)/};
+function detectEmotion(t){for(const [e,re] of Object.entries(EMO))if(re.test(t))return e;return null;}
+
+const INTENTS=[
+  {name:'nameIntro',re:/(?:اسمي|انا اسمي)\s+[\u0621-\u064A]{2,15}/},
+  {name:'howAreYou',re:/(ازيك|عامل ايه|اخبارك|ايه الاخبار|كيف حالك|ازاي الحال)/},
+  {name:'greet',re:/^(سلام|السلام|اهلا|هلا|هاي|مرحبا|صباح|مساء|hi|hello|hey)/},
+  {name:'whoAreYou',re:/(انت مين|اسمك ايه|انت ايه|مين انت|بتعمل ايه|انت شغال ايه)/},
+  {name:'joke',re:/(نكته|ضحكني|قوللي حاجه تضحك|ضحك|فكاهه|كوميدي)/},
+  {name:'time',re:/(الساعه|الوقت|كام ساعه|تاريخ|دلوقتي|النهارده)/},
+  {name:'weather',re:/(الجو|طقس|حر|برد|مطر|شمس)/},
+  {name:'thanks',re:/(شكرا|متشكر|تسلم|جزاك|ربنا يخليك|الف شكر|تسلم ايدك)/},
+  {name:'bye',re:/(باي|سلام$|هستاذن|يلا|تصبح|بالتوفيق|اشوفك|الى اللقاء|مع السلامه)/},
+  {name:'compliment',re:/(حلو|جميل|ممتاز|رائع|عظمه|تحفه|بجد|برافو|شاطر|محترم)/},
+  {name:'complain',re:/(وحش|زفت|سيء|مش حلو|مش عاجب|زباله|مقرف|ظلم)/},
+  {name:'feast',re:/(عزومه|عزيمه|لمه|مناسبه|حفله|افراح|اطعام|ضيوف|عزائم)/},
+  {name:'compare',re:/(الفرق|افرق|ايه الفرق|انهي احسن|احسن من|افضل من|مقارنه)/},
+  {name:'similar',re:/(زي|شبه|بديل|بدائل|عندك حاجه زي|في حاجه زي)/},
+  {name:'combo',re:/(ينفع مع|بينفع مع|مع ايه|اطلب ايه مع|يتقدم مع)/},
+  {name:'ingredients',re:/(فيه ايه|من ايه|بيحتوي|مكونات|محتويات|بتاعه ايه|بتاع ايه|ايه اللي فيه)/},
+  {name:'vegetarian',re:/(نباتي|بدون لحمه|بدون لحوم|ماكلش لحوم|مفيش لحوم|بدون دجاج)/},
+  {name:'spicy',re:/(حار|حامي|حراق|شطه|مش حار|بغير شطه|بلا شطه)/},
+  {name:'healthy',re:/(صحي|دايت|لايت|خفيف|سعرات|قليل السعرات|ريجيم)/},
+  {name:'allergy',re:/(حساسيه|بيض|جلوتين|لاكتوز|مكسرات|سمك)/},
+  {name:'recommend',re:/(رشح|ترشيح|اقترح|تنصح|افضل|احسن|الاكثر طلب|اقتراح|مميز)/},
+  {name:'cheap',re:/(ارخص|رخيص|اقل سعر|علي القد|ميزانيه قليله|مش غالي)/},
+  {name:'expensive',re:/(اغلي|فخم|غالي|افخم)/},
+  {name:'delivery',re:/(توصيل|بتوصلوا|دليفري|خارج المقطم|رسوم)/},
+  {name:'hours',re:/(مواعيد|بتفتحوا|بتقفلوا|امتي|وقت الشغل|ساعه كام|بتستقبلوا)/},
+  {name:'friday',re:/(جمعه)/},
+  {name:'address',re:/(عنوان|فين مكانكم|مكانكم|لوكيشن|موقع|فين انتو)/},
+  {name:'payment',re:/(دفع|فيزا|كاش|فودافون|انستاباي|محفظه)/},
+  {name:'events',re:/(مناسبات|افراح|اعراس|اطعام|عزائم|حفلات|حجز|عقود|قران|سبوع)/},
+  {name:'readyToCook',re:/(جاهز|متسوي|مستوي|مطبوخ|بتسووا|طبخ|طريقه التسويه|ازاي اسويه)/},
+  {name:'menu',re:/(المنيو|كل الاصناف|عندكم ايه|القائمه|الاكل كله|اعرض|شوفلي|ايه الاصناف|كل حاجه)/},
+  {name:'cartView',re:/(افتح السله|شوف السله|السله فيها ايه|سله الطلبات)/},
+  {name:'price',re:/(بكام|سعر|اسعار|تكلفه|كام|ثمن)/},
+  {name:'cantDecide',re:/(مش عارف|مش متاكد|محتر|محتار|مش عارف اختار|ساعدني اختار)/},
+  {name:'order',re:/(عايز|اطلب|هات|ضيف|محتاج|نفسي في|خد|احتاج|ممكن)/},
+  {name:'foodFact',re:/(اصل|تاريخ|حكايه|قصه|مصري اصيل|فرعون|مطبخ مصري|اكل مصري)/}
+];
+
+function detectIntent(t,ex){if(ex.dishes.length&&/(عايز|اطلب|هات|ضيف|محتاج|نفسي|خد)/.test(t))return 'order';if(ex.dishes.length&&/(بكام|سعر|اسعار|ثمن|تكلفه)/.test(t))return 'price';if(ex.dishes.length&&/(فيه|بيحتوي|مكونات|من ايه)/.test(t))return 'ingredients';if(ex.dishes.length&&/(حار|حلو|مالح|طعم)/.test(t))return 'spicy';for(const it of INTENTS)if(it.re.test(t))return it.name;return null;}
+
+function prodListHTML(items){return `<div class="chat-prods">`+items.map(p=>{const v=p.prices[0];return `<div class="chat-prod"><span class="cp-emoji">${p.emoji}</span><span class="cp-name">${esc(p.name)}</span><span class="cp-price">${v.price} ج</span><button data-chatadd="${p.id}">+</button></div>`;}).join('')+`</div>`;}
+
+function handleGreet(){const isReturning=CONV.visitCount>1&&Math.random()<0.5;let opener=isReturning?'playful':'warm';const body=render(rand(BODIES.greet),{greet:getTimeGreeting(),name:safeName()});return{text:compose(opener,body,'inviting',false),chips:['المنيو كله','رشحلي للعشاء','عندي عزومة','ايه أحلى حاجة','بتوصلوا فين؟']};}
+function handleHowAreYou(){return{text:compose('warm',render(rand(BODIES.howAreYou)),'casual',false),chips:['المنيو كله','رشحلي','بتوصلوا فين؟']};}
+function handleWhoAreYou(){return{text:compose('thoughtful',render(rand(BODIES.whoAreYou)),null,false),chips:['المنيو كله','عندي عزومة','ايه أحلى حاجة']};}
+function handleThanks(){return{text:compose(null,render(rand(BODIES.thanks),{name:safeName()}),'warm',false),chips:['المنيو كله','رشحلي','سلام']};}
+function handleBye(){return{text:compose('warm',render(rand(BODIES.bye),{name:safeName()}),null,false),chips:[]};}
+function handleJoke(){return{text:compose(null,rand(BODIES.joke),'inviting',false),chips:['نكتة تانية','المنيو كله','رشحلي']};}
+function handleTime(){const n=new Date();const body=compose('casual',`دلوقتي الساعة *${n.getHours()}:${String(n.getMinutes()).padStart(2,'0')}*، وده يوم *${n.toLocaleDateString('ar-EG',{weekday:'long'})}*.`,'inviting');const friday=isFriday()?'\n\n⚠️ النهاردة *الجمعة* — إجازة المطبخ!':'';return{text:body+friday,chips:['المنيو كله','بتفتحوا امتى؟']};}
+function handleWeather(){return{text:compose('casual','مش عندي شبكة أرصاد بس الجو مهما كان، أحلى حاجة تدفي القلب هي طبق محشي سخن.','inviting',false),chips:['رشحلي','المنيو كله']};}
+function handleCompliment(){return{text:compose('warm',render(rand(BODIES.compliment),{name:safeName()}),'warm',false),chips:['رشحلي','المنيو كله']};}
+function handleComplain(){return{text:compose('empathetic',render(rand(BODIES.complain),{name:safeName()}),'warm',false),chips:['بتوصلوا فين؟','المنيو كله']};}
+function handleNameIntro(ex){CONV.prefs.name=ex.name;const bodies=[`تشرّفت يا *${esc(ex.name)}*! اسم جميل.`,`أهلاً يا *${esc(ex.name)}*!`,`*${esc(ex.name)}* — اسم حلو!`];return{text:compose('warm',rand(bodies),'inviting',false),chips:['المنيو كله','رشحلي','عندي عزومة']};}
+function handleFeast(ex){const guests=ex.guests||CONV.prefs.guests;const budget=ex.budget||CONV.prefs.budget;if(guests)CONV.prefs.guests=guests;if(budget)CONV.prefs.budget=budget;if(guests&&guests>20){const deposit=budget?Math.round(budget*0.3):null;return{text:`🎉 *عزومة ${guests} فرد* — مناسبة كبيرة!\n\nللأعداد فوق 20 فرد، بنجهزها بحجز خاص مع فريق المطبخ:\n\n📞 *اتصل بينا:* ${PHONE_DISPLAY}\n💰 *دفعة مقدمة:* 30%${deposit?` (${money(deposit)} تقريباً)`:''}\n⏰ *الحجز المسبق:* 3-4 أيام\n\n*الرقم:* ${PHONE_DISPLAY}`,chips:['📞 هتصل','افتح واتساب','المنيو كله']};}if(guests&&budget){const plan=buildFeast(guests,budget);const tot=plan.reduce((s,p)=>s+p.price*p.qty,0);CONV.prefs.lastPlan=plan;const lines=plan.map(p=>`• ${p.emoji} ${p.name} — ${p.label==='كيلو'?p.qty+' كيلو':p.qty+' × '+p.label} = ${money(p.price*p.qty)}`).join('\n');return{text:compose('excited',`تمام يا ${safeName()}! سفرة *${guests} أفراد* بميزانية *${money(budget)}*:\n\n${lines}\n\n💰 الإجمالي: *${money(tot)}*\n\nتحب أضيفها كلها للسلة؟`,'inviting'),items:plan.map(p=>byId(p.id)),chips:['ضيفها للسلة','غيّر الأصناف','عايز أرخص'],feast:plan};}if(guests)return{text:compose('excited',`عزومة لـ *${guests} أفراد*! قولّي ميزانيتك.`,'inviting'),chips:['1500 جنيه','2500 جنيه','3500 جنيه','5000 جنيه']};if(budget){const affordable=MENU.filter(p=>p.prices.some(v=>v.price<=budget)).slice(0,5);return{text:compose('thoughtful',`بميزانية *${money(budget)}* أقدر أظبطلك حاجات حلوة. قولّي لكام فرد؟`,'inviting'),items:affordable,chips:['لكام فرد؟','رشحلي','المنيو كله']};}return{text:compose('excited',rand(BODIES.feastSmall),'inviting'),chips:['8 أفراد','10 أفراد','15 فرد','25 فرد','50 فرد','المنيو كله']};}
+function handleRecommend(){let pool=MENU.slice();if(CONV.prefs.veg)pool=pool.filter(p=>meta(p.id).veg);if(CONV.prefs.spicy===false)pool=pool.filter(p=>(meta(p.id).spicy||0)===0);if(CONV.prefs.light)pool=pool.filter(p=>meta(p.id).light);const bests=BESTSELLERS.map(byId).filter(p=>pool.includes(p));const picks=(bests.length>=2?bests:pool).slice(0,3);let body=rand(BODIES.recommend);return{text:compose('thoughtful',body,'inviting',true),items:picks,chips:['عايز محاشي','عايز لحوم','عايز صواني','ضيفها للسلة']};}
+function handleCheap(){const cheap=[...MENU].sort((a,b)=>a.prices[0].price-b.prices[0].price).slice(0,4);return{text:compose('casual',rand(BODIES.cheap),'inviting',true),items:cheap,chips:['عايز حاجة فاخرة','رشحلي','المنيو كله']};}
+function handleExpensive(){const priciest=[...MENU].sort((a,b)=>b.prices[0].price-a.prices[0].price).slice(0,4);return{text:compose('excited',rand(BODIES.expensive),'inviting'),items:priciest,chips:['رشحلي','عايز حاجة أرخص','المنيو كله']};}
+function handleCompare(ex){if(ex.dishes.length<2){if(ex.dishes.length===1){const cat=ex.dishes[0].cat;const others=MENU.filter(p=>p.cat===cat&&p.id!==ex.dishes[0].id).slice(0,2);if(others.length)return{text:`عايز أقارن ${ex.dishes[0].name} بإيه؟`,items:[ex.dishes[0],...others],chips:others.map(o=>`الفرق بين ${ex.dishes[0].name} و ${o.name}`)};}return{text:'قولّي عايز أقارن إيه بإيه؟',chips:['الفرق بين البشاميل والنجرسكو','الفرق بين الكفتة والبرجر']};}const [a,b]=ex.dishes;const ma=meta(a.id),mb=meta(b.id);const va=a.prices[0].price,vb=b.prices[0].price;const diff=va===vb?'نفس السعر':(va>vb?`${a.name} أغلى بـ ${va-vb} ج`:`${b.name} أغلى بـ ${vb-va} ج`);const lines=[`🔍 *${a.name}* ضد *${b.name}*:`,'',`• *${a.name}*: ${va} ج — ${ma.prep}`,`• *${b.name}*: ${vb} ج — ${mb.prep}`,'',`💰 *الفرق*: ${diff}`].join('\n');return{text:compose('thoughtful',lines,'inviting'),items:[a,b],chips:['عايز أطلب واحد','رشحلي','المنيو كله']};}
+function handleSimilar(ex){if(!ex.dish&&!CONV.prefs.lastDish)return{text:'عايز حاجة شبه إيه؟',chips:['زي الكرنب','زي البشاميل','زي الشيش']};const target=ex.dish||CONV.prefs.lastDish;const alts=MENU.filter(p=>p.id!==target.id&&p.cat===target.cat).slice(0,3);return{text:compose('thoughtful',`لو عاجبك *${target.name}*، جرّب كمان:`,'inviting'),items:alts,chips:['عايز أرخص','عايز أفخم','رشحلي']};}
+function handleCombo(ex){if(!ex.dish&&!CONV.prefs.lastDish)return{text:'عايز أعرف ينفع مع إيه؟',chips:['مع الشيش','مع البشاميل','مع المحشي']};const target=ex.dish||CONV.prefs.lastDish;let suggestions=[];if(target.cat==='mahshi')suggestions=[byId('py6'),byId('sb4')];else if(target.cat==='meat')suggestions=[byId('tr1'),byId('sb1')];else if(target.cat==='poultry')suggestions=[byId('mh6'),byId('sb4')];else if(target.cat==='trays')suggestions=[byId('py5'),byId('mh6')];else suggestions=[byId('mh6'),byId('tr1')];suggestions=suggestions.filter(Boolean).filter(p=>p.id!==target.id).slice(0,2);return{text:compose('thoughtful',`مع *${target.name}* أحلى حاجة:`,'inviting'),items:suggestions,chips:['ضيفهم للسلة','رشحلي']};}
+function handleIngredients(ex){if(!ex.dish&&!CONV.prefs.lastDish)return{text:'عايز تعرف مكونات إيه؟',chips:['مكونات البشاميل','مكونات الشيش','مكونات المحشي']};const target=ex.dish||CONV.prefs.lastDish;const m=meta(target.id);const lines=[`📋 *${target.name}*:`,m.ingredients?.length?m.ingredients.map(i=>`• ${i}`).join('\n'):'• معلومات مش متوفرة','',m.allergens?.length?`⚠️ *حساسية*: ${m.allergens.join('، ')}`:'✅ مفيش مسببات حساسية','',`${m.veg?'🌿 نباتي':'🥩 فيه لحوم'} · ${m.spicy?'🌶️ حار':'🍃 مش حار'} · 🔥 ${m.prep}`].join('\n');return{text:compose('thoughtful',lines,'inviting'),items:[target],chips:['فيه حساسية؟','عايز أطلب','رشحلي']};}
+function handleVegetarian(){CONV.prefs.veg=true;const veg=MENU.filter(p=>meta(p.id).veg);if(veg.length)return{text:compose('warm','🌿 خياراتنا النباتية:','inviting'),items:veg,chips:['أرخص حاجة نباتي','المنيو كله']};return{text:compose('thoughtful','مفيش أصناف نباتية صافية. بس ممكن نجهزلك محشي بدون لحمة لو حابب.','inviting'),chips:['تواصل واتساب','المنيو كله']};}
+function handleSpicy(ex){if(!ex.dish&&!CONV.prefs.lastDish){const spicy=MENU.filter(p=>meta(p.id).spicy).slice(0,4);const notSpicy=MENU.filter(p=>!meta(p.id).spicy).slice(0,4);return{text:'🌶️ *حار*: '+spicy.map(p=>p.name).join('، ')+'\n🍃 *مش حار*: '+notSpicy.map(p=>p.name).join('، '),items:[...spicy.slice(0,2),...notSpicy.slice(0,2)],chips:['عايز حار','عايز مش حار','المنيو كله']};}const target=ex.dish||CONV.prefs.lastDish;const m=meta(target.id);return{text:compose('casual',`*${target.name}* ${m.spicy?'🌶️ حار':'🍃 مش حار'}.`,'casual'),items:[target],chips:['عايز مش حار','عايز حار','عايز أطلب']};}
+function handleHealthy(){CONV.prefs.light=true;const light=MENU.filter(p=>meta(p.id).light).slice(0,5);return{text:compose('thoughtful','🥗 دي أخف الأصناف:','inviting'),items:light,chips:['عايز نباتي','رشحلي','المنيو كله']};}
+function handleAllergy(ex){const allergen=/بيض/.test(ex.text)?'بيض':/جلوتين/.test(ex.text)?'جلوتين':(/لاكتوز/.test(ex.text)||/لبن/.test(ex.text))?'لاكتوز':/مكسرات/.test(ex.text)?'مكسرات':/سمك/.test(ex.text)?'سمك':null;if(!allergen)return{text:'قولّي عندك حساسية من إيه بالظبط.',chips:['حساسية جلوتين','حساسية لاكتوز','حساسية مكسرات']};const safe=MENU.filter(p=>!(meta(p.id).allergens||[]).includes(allergen));const avoid=MENU.filter(p=>(meta(p.id).allergens||[]).includes(allergen));return{text:compose('thoughtful',`⚠️ *فيها ${allergen}*: ${avoid.map(p=>p.name).join('، ')||'مفيش'}\n\n✅ *الآمنة*: ${safe.slice(0,5).map(p=>p.name).join('، ')}`,'inviting'),items:safe.slice(0,4),chips:['تواصل واتساب','المنيو كله']};}
+function handleDelivery(){return{text:compose('casual',render(rand(BODIES.delivery),{phone:PHONE_DISPLAY}),'inviting'),chips:['بتفتحوا امتى؟','العنوان فين؟','المنيو كله']};}
+function handleHours(){const f=isFriday()?'\n\n⚠️ *النهاردة الجمعة* — إجازة المطبخ.':'';return{text:compose('casual',rand(BODIES.hours)+f,'casual'),chips:['بتوصلوا فين؟','المنيو كله']};}
+function handleFriday(){return{text:compose('casual',rand(BODIES.friday),'casual'),chips:['بتفتحوا امتى؟','المنيو كله']};}
+function handleAddress(){return{text:compose('casual',rand(BODIES.address),'inviting'),chips:['المنيو كله','رشحلي']};}
+function handlePayment(){return{text:compose('casual',rand(BODIES.payment),'casual'),chips:['تواصل واتساب','المنيو كله']};}
+function handleEvents(ex){const g=ex.guests?` لـ *${ex.guests} أفراد*`:'';if(ex.guests&&ex.guests>20){return{text:`🎉 *مناسبة ${ex.guests} فرد*!\n\n📞 اتصل بينا: ${PHONE_DISPLAY}\n💰 دفعة مقدمة: 30%\n⏰ الحجز: 3-4 أيام`,chips:['📞 هتصل','المنيو كله']};}return{text:compose('excited',rand(BODIES.events)+g,'inviting'),chips:['عزومة 20 فرد','عزومة 50 فرد','عزومة 100 فرد']};}
+function handleReadyToCook(){return{text:compose('thoughtful',rand(BODIES.readyToCook),'inviting'),chips:['طريقة تسوية البشاميل','طريقة تسوية المحشي','المنيو كله']};}
+function handleMenu(){const lines=['🍽️ *المنيو:*','','🥬 *محاشي*: كرنب 140، ورق عنب 180، كوسة 150، فلفل 130، مشكل 140، ممبار 280','🥩 *لحوم*: كفتة 360، برجر 360، بفتيك 650، كبيبة 350، حواوشي 300','🍗 *طيور*: شيش 320، بانيه 320، فرخة 320، حمام فريك 370','🥘 *صواني*: بشاميل 380/480، نجرسكو 380/480، جلاش 300/350','🥟 *سمبوسك*: لحمة 350، جبنة 250، كيري بسطرمة 280','','تحب أرشحلك حاجة؟'].join('\n');return{text:compose('casual',lines,'inviting'),chips:['عايز محاشي','عايز صواني','رشحلي','أرخص حاجة']};}
+function handlePrice(ex){if(ex.dish){const prices=ex.dish.prices.map(v=>`${v.label}: ${v.price} ج`).join(' | ');CONV.prefs.lastDish=ex.dish;return{text:compose('casual',`*${ex.dish.name}* — ${prices}\n\nتحب أضيفه للسلة؟`,'inviting'),items:[ex.dish],chips:['ضيفه للسلة','عايز أرخص','عايز أفخم']};}return{text:handleMenu().text,chips:['بكام المحشي؟','بكام البشاميل؟','بكام الشيش؟']};}
+function handleCartView(){if(!cart.length)return{text:'سلتك فاضية لسه.',chips:['رشحلي','المنيو كله']};openCart();return{text:compose('casual','فتحتلك السلة:','casual'),chips:['تمام','ضيف حاجة تانية','رشحلي']};}
+function handleOrder(ex){if(/(ضيفها|ضيفهم|ضيف الكل|اطلبها|ضيف السفره)/.test(ex.text)&&CONV.prefs.lastPlan){const plan=CONV.prefs.lastPlan;plan.forEach(p=>{const prod=byId(p.id);if(prod){const idx=prod.prices.findIndex(x=>x.label===p.label);addToCart(p.id,idx<0?0:idx,p.qty);}});CONV.prefs.lastPlan=null;openCart();return{text:compose('excited',`تمام يا ${safeName()}! ضفتلك السفرة كلها.`,'warm'),chips:['تمام','رشحلي تاني','المنيو كله']};}if(/(افتح السله|شوف السله|السله|الاوردر|الطلب)/.test(ex.text)&&!ex.dish)return handleCartView();if(ex.dish){const dish=ex.dish;CONV.prefs.lastDish=dish;if(dish.prices.length>1&&!ex.qty){return{text:compose('casual',`*${dish.name}* عندنا بحجمين — تحب أنهي؟`,'inviting'),items:[dish],chips:dish.prices.map(v=>`أطلب ${v.label} — ${v.price} ج`),pending:{dishId:dish.id,awaitingSize:true,name:dish.name}};}const qty=ex.qty||1,idx=0;return{text:compose('casual',`*${dish.name}* ${qty>1?`× ${qty} `:''}بسعر *${money(dish.prices[idx].price*qty)}*. أضيفه للسلة؟`,'inviting'),items:[dish],chips:['تمام ضيفه','لأ بلاش','المنيو كله'],pending:{dishId:dish.id,qty,idx,name:dish.name}};}if(ex.cat){const items=MENU.filter(p=>p.cat===ex.cat).slice(0,6);return{text:compose('excited',`تمام! دي أصناف *${CATS[ex.cat]}*:`,'inviting'),items,chips:items.slice(0,4).map(p=>`عايز ${p.name}`)};}if(CONV.prefs.lastDish){const dish=CONV.prefs.lastDish;return{text:`تقصد *${dish.name}*؟ أضيفه؟`,items:[dish],chips:['تمام ضيفه','لأ بلاش','المنيو كله'],pending:{dishId:dish.id,qty:1,idx:0,name:dish.name}};}return{text:'تحب تطلب إيه؟ قولّي اسم الطبق.',chips:['المنيو كله','رشحلي','عايز محاشي']};}
+function handleConfirm(){if(CONV.prefs.pendingOrder&&!CONV.prefs.pendingOrder.awaitingSize){const po=CONV.prefs.pendingOrder;addToCart(po.dishId,po.idx||0,po.qty||1);CONV.prefs.pendingOrder=null;return{text:compose('excited',`تمام يا ${safeName()}! ضفتلك *${po.name}*.`,'inviting'),chips:['المنيو كله','رشحلي','افتح السلة']};}return{text:'تمام! تحب أعملك إيه؟',chips:['المنيو كله','رشحلي','عندي عزومة']};}
+function handleCancel(){CONV.prefs.pendingOrder=null;return{text:compose('casual','تمام، لغيت الطلب.','casual'),chips:['المنيو كله','رشحلي']};}
+function handleFoodFact(){const facts=['📜 المحشي من أقدم أكلات المطبخ المصري.','🍲 كلمة "محشي" جاية من الحشو.','🥬 الكرنب المحشي هو أكثر نوع محشي بيتلم في مصر.','🥘 البشاميل أصلها فرنساوي، بس المصريين عملوها بالمكرونة واللحمة وبقت مصرية!'];return{text:compose('thoughtful',rand(facts),'inviting'),chips:['رشحلي محشي','المنيو كله','حكاية تانية']};}
+function handleClarify(){return{text:compose('casual',rand(BODIES.clarify),'inviting'),chips:['المنيو كله','رشحلي','بتوصلوا فين؟','عندي عزومة']};}
+
+function humanLayer(t,ex){if(/(انت بوت|انت روبوت|انت انسان|انت بتحس|انت بتفهم|انت حقيقي|انت ازاي|مين وراك|انت كداب|انت ذكاء اصطناعي|chatgpt|انت بتشتغل بالذكاء|انت بتفكر)/.test(t))return{text:compose('thoughtful',rand(BODIES.meta),null,false),chips:['المنيو كله','رشحلي','بتوصلوا فين؟']};if(/(انت غبي|انت فاشل|انت زفت|يلعن|خرا|انت مش نافع|انت بليد|يخرب|قرف|مش بتفهم حاجه)/.test(t))return{text:compose('empathetic',rand(BODIES.insult),'warm'),chips:['المنيو كله','رشحلي','تمام']};if(/^(تمام|طيب|ماشي|اها|اه|اوك|ok|حاضر|مظبوط|ايوه|ايوة|اكيد|طبعا|كده|حلو|جميل)$/.test(t)&&t.length<12)return{text:compose('casual',rand(['تمام! تحب نكمل بإيه؟','حلو! أنا هنا لو محتاج.','ماشي، تحت أمرك.','طيب، قوللي بس.','تمام! أنا هنا.']),'inviting'),chips:['المنيو كله','رشحلي','حاجة حلوة']};const emo=detectEmotion(t);if(emo&&!ex.dishes.length&&!ex.cat){const wantsFood=/(عايز|اطلب|هات|محتاج|حاجه|اكل|طبق)/.test(t);if(wantsFood)return{text:compose('empathetic',rand(EMPATHY[emo])+'\n\nوطبعاً تحت أمرك — تحب أرشحلك حاجة؟','warm'),chips:['رشحلي','حاجة دافية','حاجة حلوة','المنيو كله']};return{text:compose('empathetic',rand(EMPATHY[emo]),'casual'),chips:['تمام','نغير الموضوع','المنيو كله']};}for(const st of SMALL_TALK){if(st.re.test(t))return{text:compose('casual',rand(st.bodies),'inviting'),chips:['المنيو كله','رشحلي','ورينا حاجة']};}return null;}
+
+function think(raw){
+  const t=norm(raw);
+  const ex=extract(t);
+  CONV.turn++;
+  const h=humanLayer(t,ex);
+  if(h)return h;
+  if(ex.name)return handleNameIntro(ex);
+  if(CONV.prefs.pendingOrder&&CONV.prefs.pendingOrder.awaitingSize){const dish=byId(CONV.prefs.pendingOrder.dishId);if(dish){for(let i=0;i<dish.prices.length;i++){if(t.includes(norm(dish.prices[i].label))){addToCart(dish.id,i,1);CONV.prefs.pendingOrder=null;return{text:compose('excited',`تمام! ضفتلك *${dish.name} ${dish.prices[i].label}*.`,'warm'),chips:['المنيو كله','رشحلي','افتح السلة']};}}}CONV.prefs.pendingOrder=null;}
+  if(CONV.prefs.pendingOrder){if(/(تمام|ايوه|ايوة|اكيد|ماشي|موافق|طيب|يلا|ضيف|اطلب|اكد)/.test(t))return handleConfirm();if(/(لا|بلاش|الغاء|الغي|سيب|مش عايز)/.test(t))return handleCancel();CONV.prefs.pendingOrder=null;}
+  if(/(نباتي|veg)/.test(t))CONV.prefs.veg=true;
+  if(/(حار|حامي|شطه)/.test(t)&&!ex.negated)CONV.prefs.spicy=true;
+  if(/(مش حار|بلا شطه|بغير شطه)/.test(t))CONV.prefs.spicy=false;
+  if(/(خفيف|دايت|لايت|قليل السعرات)/.test(t))CONV.prefs.light=true;
+  let intent=detectIntent(t,ex);
+  if(!intent&&(ex.guests||ex.budget)&&(CONV.prefs.guests||CONV.prefs.budget))intent='feast';
+  if(!intent&&ex.guests&&ex.guests>=2)intent='feast';
+  switch(intent){
+    case 'greet':return handleGreet();
+    case 'howAreYou':return handleHowAreYou();
+    case 'whoAreYou':return handleWhoAreYou();
+    case 'thanks':return handleThanks();
+    case 'bye':return handleBye();
+    case 'joke':return handleJoke();
+    case 'time':return handleTime();
+    case 'weather':return handleWeather();
+    case 'compliment':return handleCompliment();
+    case 'complain':return handleComplain();
+    case 'feast':return handleFeast(ex);
+    case 'recommend':return handleRecommend();
+    case 'cheap':return handleCheap();
+    case 'expensive':return handleExpensive();
+    case 'compare':return handleCompare(ex);
+    case 'similar':return handleSimilar(ex);
+    case 'combo':return handleCombo(ex);
+    case 'ingredients':return handleIngredients(ex);
+    case 'vegetarian':return handleVegetarian();
+    case 'spicy':return handleSpicy(ex);
+    case 'healthy':return handleHealthy();
+    case 'allergy':return handleAllergy(ex);
+    case 'delivery':return handleDelivery();
+    case 'hours':return handleHours();
+    case 'friday':return handleFriday();
+    case 'address':return handleAddress();
+    case 'payment':return handlePayment();
+    case 'events':return handleEvents(ex);
+    case 'readyToCook':return handleReadyToCook();
+    case 'menu':return handleMenu();
+    case 'cartView':return handleCartView();
+    case 'price':return handlePrice(ex);
+    case 'order':return handleOrder(ex);
+    case 'cantDecide':return{text:compose('thoughtful',rand(BODIES.cantDecide),'inviting'),chips:['عايز محاشي','عايز لحوم','عايز حاجة خفيفة','المنيو كله']};
+    case 'foodFact':return handleFoodFact();
+  }
+  if(ex.dish){CONV.prefs.lastDish=ex.dish;const m=meta(ex.dish.id);return{text:compose('casual',`*${ex.dish.name}* — ${ex.dish.desc}\n💰 ${ex.dish.prices[0].label}: ${ex.dish.prices[0].price} ج\n${m.veg?'🌿 نباتي ':'🥩 فيه لحوم '}· ${m.spicy?'🌶️ حار':'🍃 مش حار'}`,'inviting'),items:[ex.dish],chips:['ضيفه للسلة','مكوناته ايه؟','رشحلي تاني']};}
+  if(ex.cat){const items=MENU.filter(p=>p.cat===ex.cat).slice(0,5);return{text:compose('casual',`ركن *${CATS[ex.cat]}* فيه اختيارات تحفة:`,'inviting'),items,chips:['الأسعار كام؟','رشحلي الأفضل','المنيو كله']};}
+  return handleClarify();
+}
+
+/* ============================================================
+   AI UI
+============================================================ */
+const aiPanel=$('#aiPanel'),aiBody=$('#aiBody'),aiChips=$('#aiChips'),aiInput=$('#aiInput');
+function openAI(){aiPanel.classList.add('on');if(!aiBody.children.length)greet();}
+function closeAI(){stopSpeaking();aiPanel.classList.remove('on');}
+$('#aiFab').onclick=()=>aiPanel.classList.contains('on')?closeAI():openAI();
+$('#aiClose').onclick=closeAI;
+$('#heroAiBtn').onclick=openAI;
+function scrollChat(){aiBody.scrollTop=aiBody.scrollHeight;}
+function addMsg(html,who='bot'){
+  const d=document.createElement('div');
+  d.className='msg '+who;
+  d.innerHTML=`<div class="mini-av">${who==='bot'?'🎙️':'🙋'}</div><div class="bubble">${html}</div>`;
+  aiBody.appendChild(d);scrollChat();
+  return d;
+}
+function setChips(list){aiChips.innerHTML=(list||[]).map(c=>`<button class="ai-chip">${esc(c)}</button>`).join('');}
+aiChips.addEventListener('click',e=>{const c=e.target.closest('.ai-chip');if(c)sendUserMessage(c.textContent);});
+
+const THINK_MSGS=['🤔 بفكر…','📝 بحسب…','🍲 بدور…','🧠 بجمع الأفكار…','💭 لحظة…','✍️ بحضر الرد…','🔍 بفكر معاك…'];
+function typing(){const d=document.createElement('div');d.className='msg bot';d.id='typingMsg';d.innerHTML=`<div class="mini-av">🎙️</div><div class="bubble" style="padding:0"><div class="typing"><span class="label">${rand(THINK_MSGS)}</span><i></i><i></i><i></i></div></div>`;aiBody.appendChild(d);scrollChat();}
+const stopTyping=()=>{const t=$('#typingMsg');if(t)t.remove();};
+
+function formatBubble(text){return esc(text).replace(/\*(.+?)\*/g,'<b style="color:var(--primary)">$1</b>').replace(/\n/g,'<br>');}
+
+function sendUserMessage(text){
+  if(!text.trim())return;
+  stopSpeaking();
+  addMsg(esc(text),'user');
+  setChips([]);
+  typing();
+  const delay=600+Math.random()*800+(text.length>50?300:0);
+  setTimeout(()=>{
+    stopTyping();
+    let r;
+    try{r=think(text);}catch(err){console.error('AI error:',err);r={text:'حصلت مشكلة صغيرة 😅 جرّب تاني.',chips:['المنيو كله','رشحلي']};}
+    if(r.pending)CONV.prefs.pendingOrder=r.pending;
+    if(r.feast)CONV.prefs.lastPlan=r.feast;
+    const html=formatBubble(r.text)+(r.items&&r.items.length?prodListHTML(r.items):'');
+    addMsg(html,'bot');
+    setChips(r.chips||[]);
+    // 🔊 SPEAK the response
+    setTimeout(()=>speak(html), 200);
+  },delay);
+}
+
+$('#aiForm').addEventListener('submit',e=>{e.preventDefault();const v=aiInput.value.trim();if(!v)return;aiInput.value='';sendUserMessage(v);});
+aiBody.addEventListener('click',e=>{const b=e.target.closest('[data-chatadd]');if(b)addToCart(b.dataset.chatadd,0,1);});
+
+/* ============================================================
+   🎤 VOICE INPUT (STT)
+============================================================ */
+const micBtn=$('#aiMic');
+function showMicWarning(msg){$$('.mic-warning').forEach(el=>el.remove());const w=document.createElement('div');w.className='mic-warning';w.innerHTML=`${msg}<button onclick="this.closest('.mic-warning').remove()">حسناً</button>`;aiPanel.appendChild(w);setTimeout(()=>w.remove(),8000);}
+
+if(!SR){micBtn.disabled=true;micBtn.title='متصفحك مش بيدعم الإدخال الصوتي';micBtn.onclick=()=>{showMicWarning('🎤 <b>الإدخال الصوتي مش متاح</b><br>استخدم <b>Chrome</b> أو <b>Edge</b>.');toast('🎤 استخدم Chrome أو Edge',3000);};}
+else if(!window.isSecureContext){micBtn.disabled=true;micBtn.title='محتاج HTTPS';micBtn.onclick=()=>{showMicWarning('🔒 <b>الإدخال الصوتي محتاج HTTPS</b><br>ارفع الموقع على استضافة آمنة.');toast('🔒 محتاج HTTPS',3000);};}
+else{
+  let rec=null,recording=false;
+  micBtn.onclick=()=>{
+    if(recording){try{rec.stop();}catch(e){}return;}
+    stopSpeaking(); // Stop TTS before listening
+    if(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia){
+      navigator.mediaDevices.getUserMedia({audio:true})
+        .then(stream=>{stream.getTracks().forEach(t=>t.stop());startRecognition();})
+        .catch(err=>{
+          if(err.name==='NotAllowedError'||err.name==='PermissionDeniedError'){showMicWarning('🎤 <b>محتاجين إذن المايك</b><br>اضغط 🔒 في شريط العنوان وامنح الإذن.');}
+          else if(err.name==='NotFoundError'){showMicWarning('🎤 <b>مفيش ميكروفون</b><br>وصّل مايك وجرب تاني.');}
+          else{showMicWarning('⚠️ مشكلة: '+esc(err.message));}
+        });
+    }else{startRecognition();}
+  };
+  
+  function startRecognition(){
+    try{
+      rec=new SR();
+      rec.lang='ar-EG';
+      rec.continuous=false;
+      rec.interimResults=true;
+      rec.maxAlternatives=1;
+      rec.onstart=()=>{recording=true;micBtn.classList.add('rec');aiInput.classList.add('recording');aiInput.placeholder='🎤 بتكلم… اتكلم براحتك';aiInput.value='';toast('🎤 اتكلم دلوقتي…',1500);};
+      rec.onresult=ev=>{let tr='';for(let i=ev.resultIndex;i<ev.results.length;i++){tr+=ev.results[i][0].transcript;}aiInput.value=tr;};
+      rec.onerror=e=>{const m={'not-allowed':'🎤 محتاجين إذن المايك','no-speech':'🤔 ماسمعتش حاجة — اتكلم أوضح','audio-capture':'🎤 مفيش ميكروفون','network':'🌐 مشكلة شبكة','aborted':'⚠️ اتلغى التسجيل'};toast(m[e.error]||('⚠️ '+e.error),3000);};
+      rec.onend=()=>{recording=false;micBtn.classList.remove('rec');aiInput.classList.remove('recording');aiInput.placeholder='اتكلم معايا… أو اضغط المايك';const v=aiInput.value.trim();if(v){setTimeout(()=>{if(aiInput.value.trim()===v){aiInput.value='';sendUserMessage(v);}},300);}};
+      rec.start();
+    }catch(err){console.error(err);toast('❌ ماقدرتش أشغل المايك',2500);recording=false;micBtn.classList.remove('rec');aiInput.classList.remove('recording');}
+  }
+}
+
+/* ============================================================
+   GREET + INIT
+============================================================ */
+function greet(){
+  const isReturning=CONV.visitCount>1;
+  const welcome=isReturning?'يا هلا! نوّرت تاني 👋':'أهلاً! أنا زكي 👋';
+  addMsg(`${welcome}<br>مساعدك الذكي في سوبر محشي. <b>بسمعك، بفهمك، وبحسبلك</b> على مزاجك.<br><br>جرّب: <i>"رشحلي للعشاء"</i> أو <i>"عندي عزومة لـ 10"</i> أو <i>"بتوصلوا فين؟"</i>`,'bot');
+  setChips(['المنيو كله','رشحلي للعشاء','عندي عزومة لـ 10','بتوصلوا فين؟']);
+  // Don't auto-speak greeting — user hasn't clicked yet (browser needs gesture)
+  // But we'll show the welcome text
+}
+
+renderMenu();
+renderCart();
+renderCartFab();
+</script>
 </body>
 </html>
